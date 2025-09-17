@@ -69,14 +69,15 @@
             color: #6366f1;
         }
         
-        /* Hero Section */
+        /* Hero Section with Interactive Timeline */
         .hero {
             min-height: 100vh;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            display: flex;
-            align-items: center;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .hero::before {
@@ -93,71 +94,214 @@
             50% { transform: translate(-50%, -50%) rotate(180deg); }
         }
         
-        .hero-container {
+        .hero-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
             position: relative;
             z-index: 2;
+            text-align: center;
         }
         
-        .hero-content h1 {
-            font-size: 3.5rem;
+        .hero-title {
+            font-size: 4rem;
             font-weight: 800;
             color: #fff;
             margin-bottom: 1rem;
             line-height: 1.1;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
         }
         
-        .hero-content .subtitle {
-            font-size: 1.3rem;
+        .hero-subtitle {
+            font-size: 1.5rem;
             color: #6366f1;
-            margin-bottom: 1.5rem;
+            margin-bottom: 3rem;
             font-weight: 600;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.7s forwards;
         }
         
-        .hero-content .description {
-            font-size: 1.1rem;
+        /* Interactive Timeline */
+        .timeline-container {
+            position: relative;
+            width: 100%;
+            margin: 4rem 0;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
+        
+        .timeline-track {
+            position: relative;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin: 2rem 0;
+        }
+        
+        .timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            border-radius: 2px;
+            width: 0%;
+            animation: progressLoad 3s ease 1.5s forwards;
+        }
+        
+        @keyframes progressLoad {
+            to { width: 100%; }
+        }
+        
+        .timeline-nodes {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 0;
+            transform: translateY(-50%);
+        }
+        
+        .timeline-node {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #6366f1;
+            border: 4px solid #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateY(-50%);
+            opacity: 0;
+            animation: nodeAppear 0.5s ease forwards;
+        }
+        
+        .timeline-node:nth-child(1) { left: 15%; animation-delay: 2s; }
+        .timeline-node:nth-child(2) { left: 35%; animation-delay: 2.2s; }
+        .timeline-node:nth-child(3) { left: 55%; animation-delay: 2.4s; }
+        .timeline-node:nth-child(4) { left: 75%; animation-delay: 2.6s; }
+        
+        @keyframes nodeAppear {
+            to { opacity: 1; transform: translateY(-50%) scale(1); }
+        }
+        
+        .timeline-node:hover {
+            transform: translateY(-50%) scale(1.3);
+            background: #8b5cf6;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+        
+        .timeline-node.active {
+            background: #10b981;
+            transform: translateY(-50%) scale(1.2);
+        }
+        
+        /* Timeline Content Cards */
+        .timeline-content {
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 15px;
+            min-width: 300px;
+            text-align: left;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .timeline-content.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .timeline-content::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid rgba(255, 255, 255, 0.95);
+        }
+        
+        .timeline-content h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .timeline-content .date {
+            color: #6366f1;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .timeline-content .tech-tag {
+            background: #6366f1;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        /* Professional Summary */
+        .professional-summary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            animation: fadeInUp 1s ease 2s forwards;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            text-align: left;
+        }
+        
+        .summary-item h4 {
+            color: #6366f1;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .summary-item p {
             color: #ccc;
-            margin-bottom: 2rem;
             line-height: 1.7;
         }
         
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-        
-        .stat-number {
-            display: block;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #6366f1;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: #ccc;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+        /* CTA Buttons */
+        .hero-cta {
+            margin-top: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 2.5s forwards;
         }
         
         .btn-primary {
@@ -172,6 +316,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            margin: 0 1rem;
         }
         
         .btn-primary:hover {
@@ -188,77 +333,11 @@
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
+            margin: 0 1rem;
         }
         
         .btn-secondary:hover {
             background: #6366f1;
-            transform: translateY(-2px);
-        }
-        
-        .hero-image {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .profile-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-        }
-        
-        .profile-avatar {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: white;
-            border: 4px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .profile-info h3 {
-            color: #fff;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .profile-info p {
-            color: #ccc;
-            margin-bottom: 1rem;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ccc;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background: #6366f1;
-            color: white;
             transform: translateY(-2px);
         }
         
@@ -304,6 +383,328 @@
             color: #ccc;
         }
         
+        /* About Section */
+        .about-content {
+            margin-top: 2rem;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .about-main {
+            background: linear-gradient(135deg, #f8f9ff, #fff);
+            border-radius: 20px;
+            padding: 3rem;
+            border-left: 5px solid #6366f1;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+        }
+        
+        .about-main h3 {
+            color: #6366f1;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .journey-story {
+            margin-bottom: 2rem;
+        }
+        
+        .journey-story h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .journey-story p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #444;
+        }
+        
+        .philosophy-card {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .philosophy-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 8rem;
+            opacity: 0.2;
+            font-family: serif;
+        }
+        
+        .philosophy-card h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .philosophy-card blockquote {
+            font-style: italic;
+            line-height: 1.7;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .about-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .highlight-card {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #6366f1;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+        }
+        
+        .highlight-icon {
+            color: #6366f1;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .highlight-card h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .highlight-list li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 2rem;
+            line-height: 1.6;
+        }
+        
+        .highlight-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            margin-top: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #6366f1, #8b5cf6);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 1.2rem;
+            top: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: #6366f1;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 0 0 3px #6366f120;
+        }
+        
+        .dark .timeline-item::before {
+            border-color: #0f0f0f;
+        }
+        
+        .timeline-content-exp {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2.5rem;
+            border-left: 4px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        
+        .dark .timeline-content-exp {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #6366f1;
+        }
+        
+        .timeline-content-exp:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+        }
+        
+        .timeline-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .dark .timeline-title {
+            color: #fff;
+        }
+        
+        .timeline-company {
+            color: #6366f1;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-date {
+            color: #666;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+        
+        .dark .timeline-date {
+            color: #ccc;
+        }
+        
+        .timeline-description {
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .dark .timeline-description {
+            color: #ddd;
+        }
+        
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .tech-category {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        }
+        
+        .dark .tech-category {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .tech-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+        
+        .tech-icon {
+            font-size: 3.5rem;
+            color: #6366f1;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .tech-category h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            color: #2c3e50;
+        }
+        
+        .dark .tech-category h3 {
+            color: #fff;
+        }
+        
+        .tech-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            justify-content: center;
+        }
+        
+        .tech-item {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+        
         /* Projects Section */
         .projects-grid {
             display: grid;
@@ -323,13 +724,13 @@
         
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.2);
         }
         
         .project-header {
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
-            padding: 2rem;
+            padding: 2.5rem;
             text-align: center;
             position: relative;
         }
@@ -346,32 +747,32 @@
         }
         
         .project-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
             opacity: 0.9;
         }
         
         .project-header h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
         
         .project-subtitle {
-            font-size: 1rem;
+            font-size: 1.1rem;
             opacity: 0.9;
             font-weight: 400;
         }
         
         .project-body {
-            padding: 2rem;
+            padding: 2.5rem;
         }
         
         .challenge-section,
         .solution-section,
         .impact-section {
             margin-bottom: 2rem;
-            padding: 1.5rem;
+            padding: 1.8rem;
             border-radius: 12px;
             border-left: 4px solid transparent;
         }
@@ -394,9 +795,9 @@
         .challenge-section h4,
         .solution-section h4,
         .impact-section h4 {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -409,25 +810,25 @@
         .challenge-section p,
         .solution-section p,
         .impact-section p {
-            line-height: 1.6;
+            line-height: 1.7;
             margin: 0;
         }
         
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.6rem;
             margin-bottom: 2rem;
-            padding: 1rem 0;
+            padding: 1.5rem 0;
             border-top: 1px solid #f0f0f0;
         }
         
         .tech-tag {
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1rem;
             border-radius: 25px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 500;
             box-shadow: 0 2px 5px rgba(99, 102, 241, 0.3);
         }
@@ -442,7 +843,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 1.8rem;
             background: #f8f9fa;
             color: #333;
             text-decoration: none;
@@ -456,154 +857,7 @@
             background: #6366f1;
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
-        }
-        
-        /* Tech Stack */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .tech-category {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .dark .tech-category {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .tech-category:hover {
-            transform: translateY(-5px);
-        }
-        
-        .tech-icon {
-            font-size: 3rem;
-            color: #6366f1;
-            margin-bottom: 1rem;
-        }
-        
-        .tech-category h3 {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        .tech-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-        }
-        
-        .tech-item {
-            background: #6366f1;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        /* About Section */
-        .about-content {
-            margin-top: 2rem;
-        }
-        
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-        }
-        
-        .about-text h3 {
-            color: #6366f1;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .about-text p {
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-            font-size: 1.1rem;
-        }
-        
-        .philosophy {
-            background: #f8f9ff;
-            border-radius: 15px;
-            padding: 2rem;
-            border-left: 4px solid #6366f1;
-            margin-top: 2rem;
-        }
-        
-        .philosophy h4 {
-            color: #6366f1;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        .philosophy blockquote {
-            font-style: italic;
-            line-height: 1.7;
-            margin: 0;
-            color: #555;
-        }
-        
-        .about-highlights {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        
-        .highlight-card {
-            background: #f8f9ff;
-            border-radius: 15px;
-            padding: 2rem;
-            border-left: 4px solid #6366f1;
-            transition: transform 0.3s ease;
-        }
-        
-        .highlight-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .highlight-icon {
-            color: #6366f1;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .highlight-card h4 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        .highlight-card ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .highlight-card li {
-            padding: 0.5rem 0;
-            position: relative;
-            padding-left: 1.5rem;
-            line-height: 1.6;
-        }
-        
-        .highlight-card li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: #6366f1;
-            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
         }
         
         /* Connect Section */
@@ -616,12 +870,12 @@
         
         .connect-info h3 {
             color: #6366f1;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1.5rem;
         }
         
         .connect-info p {
-            line-height: 1.7;
+            line-height: 1.8;
             margin-bottom: 2rem;
             font-size: 1.1rem;
         }
@@ -635,30 +889,36 @@
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem;
+            gap: 1.2rem;
+            padding: 1.5rem;
             background: #f8f9ff;
-            border-radius: 12px;
+            border-radius: 15px;
             border-left: 4px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.15);
         }
         
         .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: #6366f1;
-            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             flex-shrink: 0;
         }
         
         .contact-details h4 {
             color: #2c3e50;
             margin-bottom: 0.3rem;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         
         .contact-details p {
@@ -669,122 +929,79 @@
         
         .cta-card {
             background: linear-gradient(135deg, #f8f9ff, #fff);
-            border-radius: 20px;
-            padding: 3rem;
+            border-radius: 25px;
+            padding: 3.5rem;
             border: 1px solid #e9ecef;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
         }
         
         .cta-card h3 {
             color: #2c3e50;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
         }
         
         .cta-card p {
-            line-height: 1.7;
-            margin-bottom: 2rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
             color: #666;
         }
         
         .social-connect {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             padding-top: 2rem;
             border-top: 1px solid #e9ecef;
         }
         
         .social-connect h4 {
             color: #2c3e50;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
         }
         
-        /* Experience Timeline */
-        .timeline {
-            position: relative;
-            margin-top: 2rem;
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
         }
         
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 2rem;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #6366f1, #8b5cf6);
-        }
-        
-        .timeline-item {
-            position: relative;
-            margin-bottom: 3rem;
-            padding-left: 5rem;
-        }
-        
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 1.5rem;
-            top: 0;
-            width: 1rem;
-            height: 1rem;
-            background: #6366f1;
-            border-radius: 50%;
-            border: 3px solid #fff;
-        }
-        
-        .dark .timeline-item::before {
-            border-color: #0f0f0f;
-        }
-        
-        .timeline-content {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 2rem;
-            border-left: 4px solid #6366f1;
-        }
-        
-        .dark .timeline-content {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 4px solid #6366f1;
-        }
-        
-        .timeline-header {
-            margin-bottom: 1rem;
-        }
-        
-        .timeline-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .timeline-company {
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #6366f1;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
         }
         
-        .timeline-date {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .dark .timeline-date {
-            color: #ccc;
+        .social-link:hover {
+            background: #6366f1;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
         }
         
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 2rem;
-            }
-            
-            .hero-content h1 {
+            .hero-title {
                 font-size: 2.5rem;
             }
             
@@ -792,8 +1009,9 @@
                 display: none;
             }
             
-            .cta-buttons {
-                justify-content: center;
+            .summary-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
             
             .about-grid {
@@ -827,22 +1045,34 @@
             }
             
             .timeline-item::before {
-                left: 0.5rem;
+                left: 0.6rem;
+            }
+            
+            .timeline-nodes {
+                display: none;
+            }
+            
+            .timeline-content {
+                position: static;
+                transform: none;
+                margin-top: 2rem;
+                opacity: 1;
+                visibility: visible;
             }
         }
         
         /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
-        }
-        
         @keyframes fadeInUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
         }
         
         .fade-in:nth-child(1) { animation-delay: 0.1s; }
@@ -867,52 +1097,168 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Interactive Timeline -->
     <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="fade-in">Data Engineer & Analytics Architect</h1>
-                <p class="subtitle fade-in">Transforming Complex Data into Business Intelligence</p>
-                <p class="description fade-in">
-                    <strong>What I Do:</strong> I architect and build enterprise-scale data pipelines that transform raw, chaotic data into strategic business intelligence for Fortune 500 companies and growing startups.<br><br>
-                    
-                    <strong>How I Do It:</strong> Using cutting-edge technologies like PySpark, Databricks, and multi-cloud platforms (AWS, Azure, GCP), I design automated ETL workflows with Apache Airflow, implement robust data quality frameworks with Great Expectations, and ensure regulatory compliance across sensitive datasets.<br><br>
-                    
-                    <strong>The Results:</strong> My solutions don't just move data—they accelerate business decisions, protect revenue, and unlock competitive advantages that directly impact the bottom line.
-                </p>
-                
-                <div class="cta-buttons fade-in">
-                    <a href="#projects" class="btn-primary">
-                        <i class="fas fa-rocket"></i> View My Work
-                    </a>
-                    <a href="#contact" class="btn-secondary">Let's Connect</a>
+        <div class="hero-content">
+            <h1 class="hero-title">Data Engineer & Analytics Architect</h1>
+            <p class="hero-subtitle">Code Journey Timeline</p>
+            
+            <!-- Interactive Timeline -->
+            <div class="timeline-container">
+                <div class="timeline-track">
+                    <div class="timeline-progress"></div>
+                    <div class="timeline-nodes">
+                        <div class="timeline-node" data-content="first-code">
+                            <div class="timeline-content">
+                                <h3>First Line of Code</h3>
+                                <div class="date">2018</div>
+                                <p>Started my computer science journey at CMR Institute, writing my first "Hello World" in Python. Little did I know this would spark a passion for transforming data into business intelligence.</p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Java</span>
+                                    <span class="tech-tag">C++</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-node" data-content="first-project">
+                            <div class="timeline-content">
+                                <h3>Healthcare Data Pioneer</h3>
+                                <div class="date">2021</div>
+                                <p>Built my first production-grade ETL pipeline at CloudEnd Platform, processing sensitive patient data while maintaining HIPAA compliance. Learned the critical importance of data governance.</p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">PySpark</span>
+                                    <span class="tech-tag">AWS Glue</span>
+                                    <span class="tech-tag">Delta Lake</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-node" data-content="enterprise-scale">
+                            <div class="timeline-content">
+                                <h3>Enterprise Scale Mastery</h3>
+                                <div class="date">2022</div>
+                                <p>Revolutionized customer analytics at Knowledge Solutions, processing 50K+ weekly survey responses and building dashboards that influenced $2M+ business decisions.</p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Databricks</span>
+                                    <span class="tech-tag">Apache Airflow</span>
+                                    <span class="tech-tag">Power BI</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-node active" data-content="fortune-500">
+                            <div class="timeline-content active">
+                                <h3>Fortune 500 Impact</h3>
+                                <div class="date">2025</div>
+                                <p>Currently transforming FedEx's logistics data infrastructure, processing 10M+ daily transactions while pursuing my MS in Data Science. The journey continues...</p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Multi-Cloud</span>
+                                    <span class="tech-tag">ML Pipelines</span>
+                                    <span class="tech-tag">Real-time Analytics</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="hero-image fade-in">
-                <div class="profile-card">
-                    <div class="profile-avatar">
-                        <i class="fas fa-user"></i>
+            <!-- Professional Summary -->
+            <div class="professional-summary">
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <h4><i class="fas fa-cogs"></i> What I Do</h4>
+                        <p>I architect and build enterprise-scale data pipelines that transform raw, chaotic data into strategic business intelligence for Fortune 500 companies and growing startups.</p>
                     </div>
-                    <div class="profile-info">
-                        <h3>Varshitha Gudimalla</h3>
-                        <p>Data Engineer | MS Data Science</p>
-                        <div class="social-links">
-                            <a href="mailto:varshithag1908@gmail.com" class="social-link">
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                            <a href="https://github.com/varshitha-g" class="social-link">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/varshitha-gudimalla-data-engineer/" class="social-link">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://public.tableau.com/app/profile/gudimalla.varshitha/vizzes" class="social-link">
-                                <i class="fas fa-chart-bar"></i>
-                            </a>
-                            <a href="tel:+15185287072" class="social-link">
-                                <i class="fas fa-phone"></i>
-                            </a>
+                    <div class="summary-item">
+                        <h4><i class="fas fa-tools"></i> How I Do It</h4>
+                        <p>Using cutting-edge technologies like PySpark, Databricks, and multi-cloud platforms (AWS, Azure, GCP), I design automated ETL workflows with Apache Airflow and robust data quality frameworks.</p>
+                    </div>
+                    <div class="summary-item">
+                        <h4><i class="fas fa-chart-line"></i> The Results</h4>
+                        <p>My solutions don't just move data—they accelerate business decisions, protect revenue, and unlock competitive advantages that directly impact the bottom line.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="hero-cta">
+                <a href="#projects" class="btn-primary">
+                    <i class="fas fa-rocket"></i> View My Work
+                </a>
+                <a href="#connect" class="btn-secondary">Let's Connect</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>Transforming complex data challenges into scalable business solutions across diverse industries</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-grid">
+                    <div class="about-main fade-in">
+                        <h3><i class="fas fa-user-tie"></i> My Journey</h3>
+                        
+                        <div class="journey-story">
+                            <h4>From India to Fortune 500</h4>
+                            <p>
+                                My data engineering journey began in the vibrant tech landscape of Hyderabad, India, where I earned my computer science degree and discovered my passion for transforming raw data into meaningful insights. What started as curiosity about algorithms and databases has evolved into a career architecting enterprise-scale data solutions.
+                            </p>
+                            
+                            <p>
+                                From building HIPAA-compliant healthcare systems at CloudEnd Platform to revolutionizing customer analytics at Knowledge Solutions, and now transforming logistics data at FedEx, I've navigated diverse industries, each teaching me unique approaches to data challenges and regulatory requirements.
+                            </p>
+                            
+                            <p>
+                                Currently pursuing my MS in Data Science at University at Albany while working full-time, I embody the intersection of academic rigor and real-world application. This dual perspective allows me to implement cutting-edge research while solving immediate business problems at enterprise scale.
+                            </p>
+                        </div>
+                        
+                        <div class="philosophy-card">
+                            <h4><i class="fas fa-quote-left"></i> My Philosophy</h4>
+                            <blockquote>
+                                Data engineering isn't just about moving bits and bytes—it's about creating the foundation for intelligent business decisions. Every pipeline I build, every optimization I make, is designed to unlock competitive advantages and drive measurable business impact. I believe in building solutions that don't just work today, but scale for tomorrow's challenges.
+                            </blockquote>
+                        </div>
+                    </div>
+                    
+                    <div class="about-sidebar">
+                        <div class="highlight-card fade-in">
+                            <i class="fas fa-briefcase highlight-icon"></i>
+                            <h4>Professional Focus</h4>
+                            <ul class="highlight-list">
+                                <li>Enterprise-scale data pipeline architecture</li>
+                                <li>Multi-cloud platform expertise (AWS, Azure, GCP)</li>
+                                <li>Regulatory compliance and data governance</li>
+                                <li>Real-time analytics and ML model deployment</li>
+                                <li>Cross-functional team leadership and collaboration</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="highlight-card fade-in">
+                            <i class="fas fa-industry highlight-icon"></i>
+                            <h4>Industry Experience</h4>
+                            <ul class="highlight-list">
+                                <li><strong>Healthcare:</strong> HIPAA-compliant patient data systems with predictive analytics</li>
+                                <li><strong>Analytics:</strong> Customer behavior modeling and retention optimization</li>
+                                <li><strong>Logistics:</strong> Global supply chain data transformation at enterprise scale</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="highlight-card fade-in">
+                            <i class="fas fa-graduation-cap highlight-icon"></i>
+                            <h4>Continuous Learning</h4>
+                            <ul class="highlight-list">
+                                <li>MS Data Science, University at Albany (Expected May 2025)</li>
+                                <li>Advanced Machine Learning and Statistical Computing</li>
+                                <li>Research in distributed computing and cloud architecture</li>
+                                <li>Industry certifications and emerging technology adoption</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -920,8 +1266,119 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section">
+    <!-- Experience Section (Without Graduate Student) -->
+    <section id="experience" class="section dark">
+        <div class="container">
+            <div class="section-title">
+                <h2>Professional Experience</h2>
+                <p>Building scalable data solutions across healthcare, analytics, and enterprise logistics</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content-exp">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">Data Engineer</h3>
+                            <div class="timeline-company">FedEx</div>
+                            <div class="timeline-date">January 2025 – Present</div>
+                        </div>
+                        <p class="timeline-description">
+                            <strong>Transforming Fortune 500 logistics data infrastructure</strong> for real-time analytics and ML-driven insights across global shipping networks. Building enterprise-grade ETL pipelines processing 10M+ daily transactions while ensuring regulatory compliance and optimal performance across multi-cloud environments.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content-exp">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">Data Engineer</h3>
+                            <div class="timeline-company">Knowledge Solutions</div>
+                            <div class="timeline-date">June 2022 – July 2023</div>
+                        </div>
+                        <p class="timeline-description">
+                            <strong>Revolutionized customer analytics capabilities</strong> by developing PySpark pipelines processing 50K+ weekly survey responses. Built interactive dashboards that became primary tools for C-suite decision-making, directly influencing $2M+ retention investments and transforming the company's data-driven culture.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content-exp">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">Data Engineer</h3>
+                            <div class="timeline-company">CloudEnd Platform Pvt Ltd</div>
+                            <div class="timeline-date">January 2021 – May 2022</div>
+                        </div>
+                        <p class="timeline-description">
+                            <strong>Pioneered healthcare data infrastructure</strong> building HIPAA-compliant ETL pipelines for patient outcome prediction. Established data governance standards that became the company template for all future healthcare projects, ensuring 99.5% uptime while processing sensitive patient data.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technical Skills</h2>
+                <p>Modern data engineering stack with expertise across cloud platforms and advanced analytics</p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-category fade-in">
+                    <i class="fas fa-code tech-icon"></i>
+                    <h3>Programming & Processing</h3>
+                    <div class="tech-items">
+                        <span class="tech-item">Python</span>
+                        <span class="tech-item">SQL</span>
+                        <span class="tech-item">PySpark</span>
+                        <span class="tech-item">Apache Spark</span>
+                        <span class="tech-item">Delta Lake</span>
+                    </div>
+                </div>
+                
+                <div class="tech-category fade-in">
+                    <i class="fas fa-cloud tech-icon"></i>
+                    <h3>Cloud Platforms</h3>
+                    <div class="tech-items">
+                        <span class="tech-item">AWS</span>
+                        <span class="tech-item">Azure</span>
+                        <span class="tech-item">GCP</span>
+                        <span class="tech-item">Databricks</span>
+                        <span class="tech-item">Snowflake</span>
+                    </div>
+                </div>
+                
+                <div class="tech-category fade-in">
+                    <i class="fas fa-cogs tech-icon"></i>
+                    <h3>Orchestration & DevOps</h3>
+                    <div class="tech-items">
+                        <span class="tech-item">Apache Airflow</span>
+                        <span class="tech-item">Jenkins</span>
+                        <span class="tech-item">Docker</span>
+                        <span class="tech-item">Terraform</span>
+                        <span class="tech-item">Git</span>
+                    </div>
+                </div>
+                
+                <div class="tech-category fade-in">
+                    <i class="fas fa-chart-bar tech-icon"></i>
+                    <h3>Analytics & Visualization</h3>
+                    <div class="tech-items">
+                        <span class="tech-item">Power BI</span>
+                        <span class="tech-item">Tableau</span>
+                        <span class="tech-item">MLflow</span>
+                        <span class="tech-item">Great Expectations</span>
+                        <span class="tech-item">Unity Catalog</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section with Tableau Links -->
+    <section id="projects" class="section dark">
         <div class="container">
             <div class="section-title">
                 <h2>Featured Projects</h2>
@@ -931,9 +1388,7 @@
             <div class="projects-grid">
                 <div class="project-card fade-in">
                     <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-globe-americas"></i>
-                        </div>
+                        <i class="fas fa-globe-americas project-icon"></i>
                         <h3>Global Inflation Monitor</h3>
                         <p class="project-subtitle">Real-time Economic Intelligence Platform</p>
                     </div>
@@ -946,7 +1401,7 @@
                         
                         <div class="solution-section">
                             <h4><i class="fas fa-lightbulb"></i> My Solution</h4>
-                            <p>Built automated Spark and Snowflake pipeline processing 2M+ daily economic indicators from multiple government and financial APIs, creating real-time economic intelligence.</p>
+                            <p>Built automated Spark and Snowflake pipeline processing 2M+ daily economic indicators from multiple government and financial APIs, creating real-time economic intelligence dashboard.</p>
                         </div>
                         
                         <div class="impact-section">
@@ -975,9 +1430,7 @@
                 
                 <div class="project-card fade-in">
                     <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
+                        <i class="fas fa-users project-icon"></i>
                         <h3>Customer Churn Prediction Engine</h3>
                         <p class="project-subtitle">ML-Powered Retention Intelligence System</p>
                     </div>
@@ -990,7 +1443,7 @@
                         
                         <div class="solution-section">
                             <h4><i class="fas fa-lightbulb"></i> My Solution</h4>
-                            <p>Developed end-to-end ML pipeline analyzing 500K+ customer behavioral patterns, transaction histories, and engagement metrics with automated scoring.</p>
+                            <p>Developed end-to-end ML pipeline analyzing 500K+ customer behavioral patterns, transaction histories, and engagement metrics with automated scoring and alert systems.</p>
                         </div>
                         
                         <div class="impact-section">
@@ -1020,239 +1473,135 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
+    <!-- Connect Section -->
+    <section id="connect" class="section">
         <div class="container">
             <div class="section-title">
-                <h2>About Me</h2>
-                <p>Transforming complex data challenges into scalable business solutions across diverse industries</p>
+                <h2>Let's Connect</h2>
+                <p>Ready to transform your data challenges into business victories? Let's explore how we can work together to build something extraordinary.</p>
             </div>
             
-            <div class="about-content">
-                <div class="about-grid">
-                    <div class="about-text fade-in">
-                        <h3>My Journey</h3>
-                        <p>
-                            From a computer science student in India to architecting data solutions for Fortune 500 companies, 
-                            my journey has been driven by a passion for turning chaotic data into strategic business intelligence. 
-                            I've worked across three distinct industries—healthcare, customer analytics, and enterprise logistics—each 
-                            teaching me unique approaches to data challenges.
-                        </p>
-                        
-                        <p>
-                            Currently completing my MS in Data Science while working full-time at FedEx, I combine academic rigor 
-                            with real-world application. This dual perspective allows me to implement cutting-edge research while 
-                            solving immediate business problems at enterprise scale.
-                        </p>
-                        
-                        <div class="philosophy">
-                            <h4><i class="fas fa-quote-left"></i> My Philosophy</h4>
-                            <blockquote>
-                                "Data engineering isn't just about moving bits and bytes—it's about creating the foundation for 
-                                intelligent business decisions. Every pipeline I build, every optimization I make, is designed 
-                                to unlock competitive advantages and drive measurable business impact."
-                            </blockquote>
-                        </div>
-                    </div>
+            <div class="connect-content">
+                <div class="connect-info fade-in">
+                    <h3>Get In Touch</h3>
+                    <p>
+                        Whether you're looking to discuss data engineering opportunities, collaborate on innovative projects, 
+                        or simply want to connect with a fellow data enthusiast, I'd love to hear from you.
+                    </p>
                     
-                    <div class="about-highlights fade-in">
-                        <div class="highlight-card">
-                            <div class="highlight-icon">
-                                <i class="fas fa-briefcase"></i>
+                    <div class="contact-methods">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
                             </div>
-                            <h4>Professional Focus</h4>
-                            <ul>
-                                <li>Enterprise-scale data pipeline architecture</li>
-                                <li>Multi-cloud platform expertise (AWS, Azure, GCP)</li>
-                                <li>Regulatory compliance and data governance</li>
-                                <li>Real-time analytics and ML model deployment</li>
-                            </ul>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>varshithag1908@gmail.com</p>
+                            </div>
                         </div>
                         
-                        <div class="highlight-card">
-                            <div class="highlight-icon">
-                                <i class="fas fa-industry"></i>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
                             </div>
-                            <h4>Industry Experience</h4>
-                            <ul>
-                                <li><strong>Healthcare:</strong> HIPAA-compliant patient data systems</li>
-                                <li><strong>Analytics:</strong> Customer behavior and retention modeling</li>
-                                <li><strong>Logistics:</strong> Global supply chain optimization</li>
-                            </ul>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p>(518) 528-7072</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="connect-cta fade-in">
+                    <div class="cta-card">
+                        <h3>Ready to Build Something Amazing?</h3>
+                        <p>
+                            I'm always excited to discuss new opportunities and innovative data engineering challenges. 
+                            Let's connect and explore how we can drive business impact through intelligent data solutions.
+                        </p>
+                        
+                        <div class="cta-buttons">
+                            <a href="mailto:varshithag1908@gmail.com" class="btn-primary">
+                                <i class="fas fa-envelope"></i> Send Email
+                            </a>
+                            <a href="tel:+15185287072" class="btn-secondary">
+                                <i class="fas fa-phone"></i> Call Me
+                            </a>
                         </div>
                         
-                        <div class="highlight-card">
-                            <div class="highlight-icon">
-                                <i class="fas fa-graduation-cap"></i>
+                        <div class="social-connect">
+                            <h4>Connect on Social</h4>
+                            <div class="social-links">
+                                <a href="https://github.com/varshitha-g" class="social-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/varshitha-gudimalla-data-engineer/" class="social-link">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="https://public.tableau.com/app/profile/gudimalla.varshitha/vizzes" class="social-link">
+                                    <i class="fas fa-chart-bar"></i>
+                                </a>
+                                <a href="mailto:varshithag1908@gmail.com" class="social-link">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
                             </div>
-                            <h4>Continuous Learning</h4>
-                            <ul>
-                                <li>MS Data Science (Expected May 2025)</li>
-                                <li>Advanced ML and Statistical Computing</li>
-                                <li>Research in distributed computing systems</li>
-                                <li>Industry certifications and continuous upskilling</li>
-                            </ul>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="section dark">
-        <div class="container">
-            <div class="section-title">
-                <h2>Professional Experience</h2>
-                <p>Building scalable data solutions across healthcare, analytics, and enterprise logistics</p>
-            </div>
-            
-            <div class="timeline">
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3 class="timeline-title">Data Engineer</h3>
-                            <div class="timeline-company">FedEx</div>
-                            <div class="timeline-date">January 2025 – Present</div>
-                        </div>
-                        <p>
-                            <strong>Transforming Fortune 500 logistics data infrastructure</strong> for real-time analytics and ML-driven insights across global shipping networks. Building enterprise-grade ETL pipelines processing 10M+ daily transactions while ensuring regulatory compliance and optimal performance.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3 class="timeline-title">Graduate Student & Research Assistant</h3>
-                            <div class="timeline-company">University at Albany</div>
-                            <div class="timeline-date">August 2023 – December 2024</div>
-                        </div>
-                        <p>
-                            <strong>Advanced data science mastery</strong> through intensive coursework in Machine Learning, Big Data Analytics, and Statistical Computing. Developed cutting-edge capstone project demonstrating distributed computing and cloud architecture applications.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3 class="timeline-title">Data Engineer</h3>
-                            <div class="timeline-company">Knowledge Solutions</div>
-                            <div class="timeline-date">June 2022 – July 2023</div>
-                        </div>
-                        <p>
-                            <strong>Revolutionized customer analytics capabilities</strong> by developing PySpark pipelines processing 50K+ weekly survey responses. Built interactive dashboards that became primary tools for C-suite decision-making, directly influencing $2M+ retention investments.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3 class="timeline-title">Data Engineer</h3>
-                            <div class="timeline-company">CloudEnd Platform Pvt Ltd</div>
-                            <div class="timeline-date">January 2021 – May 2022</div>
-                        </div>
-                        <p>
-                            <strong>Pioneered healthcare data infrastructure</strong> building HIPAA-compliant ETL pipelines for patient outcome prediction. Established data governance standards that became the company template for all future healthcare projects.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technical Expertise -->
-    <section id="skills" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Technical Skills</h2>
-                <p>Modern data engineering stack with expertise across cloud platforms and advanced analytics</p>
-            </div>
-            
-            <div class="tech-grid">
-                <div class="tech-category fade-in">
-                    <div class="tech-icon"><i class="fas fa-code"></i></div>
-                    <h3>Programming & Processing</h3>
-                    <div class="tech-items">
-                        <span class="tech-item">Python</span>
-                        <span class="tech-item">SQL</span>
-                        <span class="tech-item">PySpark</span>
-                        <span class="tech-item">Apache Spark</span>
-                        <span class="tech-item">Delta Lake</span>
-                    </div>
-                </div>
-                
-                <div class="tech-category fade-in">
-                    <div class="tech-icon"><i class="fas fa-cloud"></i></div>
-                    <h3>Cloud Platforms</h3>
-                    <div class="tech-items">
-                        <span class="tech-item">AWS</span>
-                        <span class="tech-item">Azure</span>
-                        <span class="tech-item">GCP</span>
-                        <span class="tech-item">Databricks</span>
-                        <span class="tech-item">Snowflake</span>
-                    </div>
-                </div>
-                
-                <div class="tech-category fade-in">
-                    <div class="tech-icon"><i class="fas fa-cogs"></i></div>
-                    <h3>Orchestration & DevOps</h3>
-                    <div class="tech-items">
-                        <span class="tech-item">Apache Airflow</span>
-                        <span class="tech-item">Jenkins</span>
-                        <span class="tech-item">Docker</span>
-                        <span class="tech-item">Terraform</span>
-                        <span class="tech-item">Git</span>
-                    </div>
-                </div>
-                
-                <div class="tech-category fade-in">
-                    <div class="tech-icon"><i class="fas fa-chart-bar"></i></div>
-                    <h3>Analytics & Visualization</h3>
-                    <div class="tech-items">
-                        <span class="tech-item">Power BI</span>
-                        <span class="tech-item">Tableau</span>
-                        <span class="tech-item">MLflow</span>
-                        <span class="tech-item">Great Expectations</span>
-                        <span class="tech-item">Unity Catalog</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section dark">
-        <div class="container">
-            <div class="section-title">
-                <h2>Let's Build Something Amazing</h2>
-                <p>Ready to transform your data challenges into business victories? Let's connect and explore how we can work together.</p>
-            </div>
-            
-            <div class="cta-buttons" style="justify-content: center; margin-top: 2rem;">
-                <a href="mailto:varshithag1908@gmail.com" class="btn-primary">
-                    <i class="fas fa-envelope"></i> Email Me
-                </a>
-                <a href="tel:+15185287072" class="btn-secondary">
-                    <i class="fas fa-phone"></i> Call Me
-                </a>
-                <a href="https://github.com/varshitha-g" class="btn-secondary">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
             </div>
         </div>
     </section>
 
     <script>
+        // Interactive Timeline Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineNodes = document.querySelectorAll('.timeline-node');
+            const timelineContents = document.querySelectorAll('.timeline-content');
+            
+            timelineNodes.forEach((node, index) => {
+                node.addEventListener('click', function() {
+                    // Remove active class from all nodes and contents
+                    timelineNodes.forEach(n => n.classList.remove('active'));
+                    timelineContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked node and its content
+                    this.classList.add('active');
+                    const content = this.querySelector('.timeline-content');
+                    if (content) {
+                        content.classList.add('active');
+                    }
+                });
+                
+                // Show content on hover
+                node.addEventListener('mouseenter', function() {
+                    const content = this.querySelector('.timeline-content');
+                    if (content && !content.classList.contains('active')) {
+                        content.style.opacity = '1';
+                        content.style.visibility = 'visible';
+                    }
+                });
+                
+                node.addEventListener('mouseleave', function() {
+                    const content = this.querySelector('.timeline-content');
+                    if (content && !content.classList.contains('active')) {
+                        content.style.opacity = '0';
+                        content.style.visibility = 'hidden';
+                    }
+                });
+            });
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
