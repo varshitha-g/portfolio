@@ -128,11 +128,10 @@
         .timeline-container {
             position: relative;
             width: 100%;
-            margin: 4rem 0;
+            margin: 6rem 0;
             opacity: 0;
             animation: fadeInUp 1s ease 1s forwards;
-        }
-        
+        }        
         .timeline-track {
             position: relative;
             width: 100%;
@@ -157,12 +156,13 @@
             to { width: 100%; }
         }
         
-        .timeline-nodes {
+       .timeline-nodes {
             position: absolute;
             top: 50%;
             width: 100%;
             height: 0;
             transform: translateY(-50%);
+            z-index: 1;
         }
         
         .timeline-node {
@@ -202,7 +202,7 @@
         /* Timeline Content Cards */
         .timeline-content {
             position: absolute;
-            top: -250px;
+            top: -350px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.98);
@@ -217,12 +217,13 @@
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
+            z-index: 9999;
         }
         
         .timeline-content.active {
             opacity: 1;
             visibility: visible;
+            top: -320px;
         }
         
         .timeline-content::after {
@@ -1154,7 +1155,7 @@
                         </div>
                         
                         <div class="timeline-node active" data-content="fortune-500">
-                            <div class="timeline-content active">
+                            <div class="timeline-content">
                                 <h3>Enterprise Impact</h3>
                                 <div class="date">2025</div>
                                 <p>Currently transforming FedEx's logistics data infrastructure, processing 10M+ daily transactions while pursuing my MS in Data Science. The journey continues...</p>
@@ -1571,114 +1572,9 @@
                 </div>
             </div>
         </div>
-    </section> systems.</p>
-                        </div>
-                        
-                        <div class="impact-section">
-                            <h4><i class="fas fa-chart-line"></i> Business Impact</h4>
-                            <p><strong>87% prediction accuracy</strong> identifying at-risk customers 60 days in advance, enabling targeted retention campaigns that <strong>saved $2.3M annually</strong>.</p>
-                        </div>
-                        
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">scikit-learn</span>
-                            <span class="tech-tag">Apache Airflow</span>
-                            <span class="tech-tag">MLflow</span>
-                            <span class="tech-tag">Databricks</span>
-                        </div>
-                        
-                        <div class="project-links">
-                            <a href="https://github.com/varshitha-g/customer-churn-prediction" class="project-link">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                            <a href="https://public.tableau.com/app/profile/gudimalla.varshitha/vizzes" class="project-link">
-                                <i class="fas fa-chart-bar"></i> Analytics Dashboard
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
-    <!-- Connect Section -->
-    <section id="connect" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Let's Connect</h2>
-                <p>Ready to transform your data challenges into business victories? Let's explore how we can work together to build something extraordinary.</p>
-            </div>
-            
-            <div class="connect-content">
-                <div class="connect-info fade-in">
-                    <h3>Get In Touch</h3>
-                    <p>
-                        Whether you're looking to discuss data engineering opportunities, collaborate on innovative projects, 
-                        or simply want to connect with a fellow data enthusiast, I'd love to hear from you.
-                    </p>
-                    
-                    <div class="contact-methods">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Email</h4>
-                                <p>varshithag1908@gmail.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Phone</h4>
-                                <p>(518) 528-7072</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="connect-cta fade-in">
-                    <div class="cta-card">
-                        <h3>Ready to Build Something Amazing?</h3>
-                        <p>
-                            I'm always excited to discuss new opportunities and innovative data engineering challenges. 
-                            Let's connect and explore how we can drive business impact through intelligent data solutions.
-                        </p>
-                        
-                        <div class="cta-buttons">
-                            <a href="mailto:varshithag1908@gmail.com" class="btn-primary">
-                                <i class="fas fa-envelope"></i> Send Email
-                            </a>
-                            <a href="tel:+15185287072" class="btn-secondary">
-                                <i class="fas fa-phone"></i> Call Me
-                            </a>
-                        </div>
-                        
-                        <div class="social-connect">
-                            <h4>Connect on Social</h4>
-                            <div class="social-links">
-                                <a href="https://github.com/varshitha-g" class="social-link">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="https://www.linkedin.com/in/varshitha-gudimalla-data-engineer/" class="social-link">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                                <a href="https://public.tableau.com/app/profile/gudimalla.varshitha/vizzes" class="social-link">
-                                    <i class="fas fa-chart-bar"></i>
-                                </a>
-                                <a href="mailto:varshithag1908@gmail.com" class="social-link">
-                                    <i class="fas fa-envelope"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <script>
         // Interactive Timeline Functionality
