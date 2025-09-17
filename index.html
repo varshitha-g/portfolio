@@ -202,21 +202,22 @@
         /* Timeline Content Cards */
         .timeline-content {
             position: absolute;
-            top: -200px;
+            top: -250px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
             padding: 2rem;
             border-radius: 15px;
-            min-width: 300px;
+            min-width: 320px;
+            max-width: 400px;
             text-align: left;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
         }
         
         .timeline-content.active {
@@ -815,6 +816,8 @@
         .impact-section p {
             line-height: 1.7;
             margin: 0;
+            color: #333;
+            font-size: 1rem;
         }
         
         .tech-stack {
@@ -1208,7 +1211,7 @@
                         <h3><i class="fas fa-user-tie"></i> My Journey</h3>
                         
                         <div class="journey-story">
-                            
+                            <h4>From India to Fortune 500</h4>
                             <p>
                                 My data engineering journey began in the vibrant tech landscape of Hyderabad, India, where I earned my computer science degree and discovered my passion for transforming raw data into meaningful insights. What started as curiosity about algorithms and databases has evolved into a career architecting enterprise-scale data solutions.
                             </p>
@@ -1514,11 +1517,8 @@
                         </p>
                         
                         <div class="cta-buttons">
-                            <a href="mailto:varshithag1908@gmail.com" class="btn-primary">
-                                <i class="fas fa-envelope"></i> Send Email
-                            </a>
-                            <a href="https://www.linkedin.com/in/varshitha-gudimalla-data-engineer/" class="btn-secondary">
-                                <i class="fab fa-linkedin"></i> LinkedIn
+                            <a href="https://www.linkedin.com/in/varshitha-gudimalla-data-engineer/" class="btn-primary">
+                                <i class="fab fa-linkedin"></i> Connect on LinkedIn
                             </a>
                         </div>
                         
