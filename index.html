@@ -457,6 +457,205 @@
             line-height: 1.7;
         }
         
+        /* Journey Timeline Styles - Horizontal with visible content */
+        .journey-timeline {
+            position: relative;
+            padding: 40px 0 80px;
+            overflow-x: auto;
+            overflow-y: visible;
+        }
+        
+        .journey-timeline::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .journey-timeline::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        
+        .journey-timeline::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 10px;
+        }
+        
+        .journey-items-wrapper {
+            display: flex;
+            gap: 50px;
+            position: relative;
+            padding: 0 40px;
+            min-width: min-content;
+        }
+        
+        /* Horizontal connecting line */
+        .journey-items-wrapper:before {
+            content: "";
+            position: absolute;
+            left: 60px;
+            right: 60px;
+            top: 85px;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #3b82f6 100%);
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+            z-index: 1;
+        }
+        
+        .journey-item {
+            position: relative;
+            z-index: 2;
+            min-width: 240px;
+            max-width: 280px;
+        }
+        
+        .journey-visible {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .journey-year-label {
+            font-weight: 700;
+            color: #3b82f6;
+            font-size: 1.05em;
+            text-align: center;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-radius: 20px;
+            border: 2px solid #3b82f6;
+            white-space: nowrap;
+        }
+        
+        .journey-point {
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 4px solid #3b82f6;
+            border-radius: 50%;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .journey-point:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #3b82f6;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        .journey-item:hover .journey-point {
+            width: 32px;
+            height: 32px;
+            border-width: 5px;
+            background: #3b82f6;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5);
+            transform: scale(1.2);
+        }
+        
+        .journey-main-text {
+            text-align: center;
+            color: #1f2937;
+            line-height: 1.6;
+            font-size: 0.95em;
+            font-weight: 500;
+            margin: 10px 0 0 0;
+        }
+        
+        .journey-content {
+            position: absolute;
+            bottom: 130px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: white;
+            padding: 25px 30px;
+            border-radius: 16px;
+            border: 2px solid #3b82f6;
+            min-width: 320px;
+            max-width: 380px;
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.25);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 100;
+        }
+        
+        .journey-content:before {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid white;
+            filter: drop-shadow(0 2px 2px rgba(59, 130, 246, 0.2));
+        }
+        
+        .journey-content:after {
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 12px solid #3b82f6;
+            z-index: -1;
+        }
+        
+        .journey-item:hover .journey-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .journey-content h3 {
+            color: #1a202c;
+            font-size: 1.25em;
+            margin: 0 0 12px 0;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .journey-content p {
+            color: #4b5563;
+            line-height: 1.7;
+            margin: 0;
+            font-size: 0.95em;
+        }
+        
         .impact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -609,6 +808,7 @@
                 <span></span>
             </div>
             <ul class="nav-menu" id="navMenu">
+                <li><a href="#journey" onclick="closeMenu()">Journey</a></li>
                 <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
                 <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
                 <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
@@ -632,6 +832,69 @@
     </header>
 
     <div class="container">
+        <section id="journey">
+            <h2>Career Timeline</h2>
+            <div class="journey-timeline">
+                <div class="journey-items-wrapper">
+                    <div class="journey-item">
+                        <div class="journey-visible">
+                            <div class="journey-year-label">2025 - Present</div>
+                            <div class="journey-point"></div>
+                            <p class="journey-main-text">Transforming logistics data at FedEx</p>
+                        </div>
+                        <div class="journey-content">
+                            <h3>Current Mission at FedEx</h3>
+                            <p>Building real-time logistics data platform processing 1B+ daily records. Engineered AWS lakehouse reducing ETL time from 5 hours to 2 hours. Implemented streaming pipeline with 99.9% reliability, enabling fraud detection that prevented $2M+ annual losses.</p>
+                        </div>
+                    </div>
+                    <div class="journey-item">
+                        <div class="journey-visible">
+                            <div class="journey-year-label">2023 - 2025</div>
+                            <div class="journey-point"></div>
+                            <p class="journey-main-text">Completed MS in Data Science at University at Albany while working full-time</p>
+                        </div>
+                        <div class="journey-content">
+                            <h3>Graduate Education</h3>
+                            <p>Earned Master of Science in Data Science while working full-time as a Data Engineer. Focused on advanced machine learning, big data analytics, and cloud computing. Applied academic research directly to production systems, bridging theory and practice.</p>
+                        </div>
+                    </div>
+                    <div class="journey-item">
+                        <div class="journey-visible">
+                            <div class="journey-year-label">2022 - 2023</div>
+                            <div class="journey-point"></div>
+                            <p class="journey-main-text">Revolutionized customer analytics at Knowledge Solutions, processed 15TB monthly</p>
+                        </div>
+                        <div class="journey-content">
+                            <h3>E-Commerce Analytics Revolution</h3>
+                            <p>Migrated 15TB monthly to Azure cloud platform. Built PySpark ML pipelines achieving 85% churn prediction accuracy, retaining $4.8M revenue. Optimized Snowflake warehouse improving query performance 50% while reducing costs 15%.</p>
+                        </div>
+                    </div>
+                    <div class="journey-item">
+                        <div class="journey-visible">
+                            <div class="journey-year-label">2021 - 2022</div>
+                            <div class="journey-point"></div>
+                            <p class="journey-main-text">Built HIPAA-compliant healthcare data infrastructure at CloudEnd Platform</p>
+                        </div>
+                        <div class="journey-content">
+                            <h3>Healthcare Data Engineering</h3>
+                            <p>Architected secure AWS data lake processing 100K+ patient records monthly with zero HIPAA violations. Developed predictive analytics achieving 85% accuracy, enabling 500+ therapists to improve treatment completion 10-12%.</p>
+                        </div>
+                    </div>
+                    <div class="journey-item">
+                        <div class="journey-visible">
+                            <div class="journey-year-label">2018 - 2022</div>
+                            <div class="journey-point"></div>
+                            <p class="journey-main-text">Computer Science degree at CMR Institute, discovered passion for data engineering</p>
+                        </div>
+                        <div class="journey-content">
+                            <h3>The Beginning</h3>
+                            <p>Bachelor of Technology in Computer Science from CMR Institute of Technology, Hyderabad. First exposure to Python, data structures, and algorithms. Discovered passion for data engineering through coursework in database systems and distributed computing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section>
             <h2>What I Do</h2>
             <div class="highlight-box">
@@ -830,31 +1093,7 @@
             </div>
         </section>
 
-        <section id="timeline">
-            <h2>Career Timeline</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-year">2025 - Present</div>
-                    <p>Transforming logistics data at FedEx</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2023 - 2025</div>
-                    <p>Completed MS in Data Science at University at Albany while working full-time</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2022 - 2023</div>
-                    <p>Revolutionized customer analytics at Knowledge Solutions, processed 15TB monthly</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2021 - 2022</div>
-                    <p>Built HIPAA-compliant healthcare data infrastructure at CloudEnd Platform</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2018 - 2022</div>
-                    <p>Computer Science degree at CMR Institute, discovered passion for data engineering</p>
-                </div>
-            </div>
-        </section>
+       
 
         <section>
             <h2>What Drives Me</h2>
@@ -895,15 +1134,16 @@
                     <h4>Available for:</h4>
                     <p>Full-time opportunities, contract projects, technical consultations</p>
                 </div>
+                
                 <div class="contact-item">
                     <h4>Location:</h4>
-                    <p> Open to remote nationwide • Available to relocate</p>
+                    <p>Open to remote nationwide • Available to relocate</p>
                 </div>
             </div>
             <div style="margin-top: 40px;">
-                <a href="mailto:varshithag1908@gmail.com" style="display: inline-block; background: white; color: #667eea; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px;">📧 Email Me</a>
-                <a href="https://linkedin.com/in/varshitha-gudimalla-data-engineer" target="_blank" style="display: inline-block; background: white; color: #667eea; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px;">🔗 LinkedIn</a>
-                <a href="https://github.com/varshitha-g" target="_blank" style="display: inline-block; background: white; color: #667eea; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px;">💻 GitHub</a>
+                <a href="mailto:varshithag1908@gmail.com" style="display: inline-block; background: white; color: #667eea; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px;"> Email Me</a>
+                <a href="https://linkedin.com/in/varshitha-gudimalla-data-engineer" target="_blank" style="display: inline-block; background: white; color: #667eea; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px;"> LinkedIn</a>
+                <a href="https://github.com/varshitha-g" target="_blank" style="display: inline-block; background: white; color: #667eea; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px;"> GitHub</a>
             </div>
         </section>
     </div>
