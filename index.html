@@ -1,78 +1,268 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Varshitha Gudimalla | Data Engineer</title>
   <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Data Engineer portfolio: AWS, Azure, Databricks, PySpark, Airflow, Delta Lake."/>
 </head>
 <body>
   <!-- Background Animation -->
-  <canvas id="bg-canvas"></canvas>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
-  <!-- Header -->
-  <header>
-    <h1>Varshitha Gudimalla</h1>
-    <p>Data Engineer | AWS · Azure · Databricks · PySpark</p>
+  <!-- Header / Nav -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">Varshitha Gudimalla</div>
+      <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#connect">Connect</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <h2>Building Scalable, Real-Time Data Platforms</h2>
-      <p>
-        3+ years designing and optimizing ETL & streaming pipelines across AWS and Azure —
-        transforming 1B+ daily records into business-ready insights.
-      </p>
-      <div class="metrics">
-        <div><strong>1B+</strong><br>Daily Records</div>
-        <div><strong>60%</strong><br>Runtime Reduction</div>
-        <div><strong>99.9%</strong><br>SLA Reliability</div>
-        <div><strong>25%</strong><br>Cost Savings</div>
+  <!-- Home -->
+  <section id="home" class="section hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="kicker">Data Engineer • AWS · Azure · Databricks · PySpark</div>
+        <h1>Building scalable, real-time data platforms</h1>
+        <p class="lead">
+          Designing and optimizing high-throughput ETL & streaming pipelines across AWS and Azure —
+          transforming 1B+ daily records into analytics-ready insights.
+        </p>
+        <div class="metrics">
+          <div><strong>1B+</strong><span>Daily Records</span></div>
+          <div><strong>60%</strong><span>Runtime Reduction</span></div>
+          <div><strong>99.9%</strong><span>SLA Reliability</span></div>
+          <div><strong>25%</strong><span>Cost Savings</span></div>
+        </div>
+        <div class="contact-row">
+          <span>(518)-528-7072</span>
+          <span>•</span>
+          <a href="mailto:varshithag1908@gmail.com">varshithag1908@gmail.com</a>
+          <span>•</span>
+          <span>USA</span>
+        </div>
+        <div class="link-row">
+          <a href="#" id="lnkLinkedin">LinkedIn</a>
+          <a href="#" id="lnkPortfolio">My Portfolio</a>
+          <a href="#" id="lnkGithub">GitHub</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="images/profile.jpg" alt="Varshitha Gudimalla profile photo"/>
       </div>
     </div>
-    <div class="hero-photo">
-      <img src="images/profile.jpg" alt="Varshitha Gudimalla Profile" />
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About</h2>
+      <p class="about-text">
+        Experienced Data Engineer designing and implementing scalable ETL/ELT pipelines across AWS and Azure cloud platforms,
+        processing 1B+ daily records from healthcare, e-commerce, and logistics domains. Proven track record of delivering
+        quantified business impact including 40–50% query performance improvements, 99.9% SLA compliance, and 15–25% cost
+        reductions through automated workflows and infrastructure optimization. Strong expertise in PySpark, Databricks, SQL, and
+        real-time data processing, with demonstrated ability to collaborate across 10–15 member cross-functional teams and translate
+        complex data requirements into actionable insights for clinical, business, and operational decision-making.
+      </p>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2>Skills</h2>
+
+      <div class="skills-grid">
+        <div class="card">
+          <h3>Programming & Data Processing</h3>
+          <p>Python (Pandas, NumPy, scikit-learn), SQL (Advanced CTEs, Window Functions), PySpark, Spark SQL, Scala</p>
+        </div>
+        <div class="card">
+          <h3>Big Data & Distributed</h3>
+          <p>Apache Spark, Delta Lake, Hadoop, Hive, SparkSQL, partitioning, indexing optimization</p>
+        </div>
+        <div class="card">
+          <h3>Cloud Platforms</h3>
+          <p>AWS (S3, Glue, Redshift, Lambda, Kinesis, Step Functions, CloudWatch), Azure (ADF, Databricks, Synapse), Snowflake, BigQuery</p>
+        </div>
+        <div class="card">
+          <h3>Storage & Architecture</h3>
+          <p>Data Lakes, Warehouses, Delta Lake, Parquet, versioning, CDC, metadata management</p>
+        </div>
+        <div class="card">
+          <h3>Streaming</h3>
+          <p>Apache Kafka, AWS Kinesis, Spark Streaming, real-time event processing, IoT telemetry ingestion</p>
+        </div>
+        <div class="card">
+          <h3>Orchestration</h3>
+          <p>Apache Airflow, Databricks Workflows, Jenkins, AWS Step Functions</p>
+        </div>
+        <div class="card">
+          <h3>Data Quality & Governance</h3>
+          <p>Great Expectations, schema validation, data profiling, deduplication, GDPR/PCI-DSS compliance</p>
+        </div>
+        <div class="card">
+          <h3>DevOps & Infra</h3>
+          <p>Git/GitHub/GitLab, CI/CD, Jenkins, Terraform, Docker, Kubernetes, autoscaling clusters</p>
+        </div>
+        <div class="card">
+          <h3>DE & Databases</h3>
+          <p>PySpark, Databricks, Delta Lake, Snowflake, SQL Server, SSIS, ADF, Synapse, ADLS</p>
+        </div>
+        <div class="card">
+          <h3>Observability</h3>
+          <p>Prometheus, Grafana, CloudWatch, SLA monitoring, alerting, perf optimization</p>
+        </div>
+        <div class="card">
+          <h3>Analytics & ML Support</h3>
+          <p>Feature engineering, MLflow, Prophet, TensorFlow, ETA & route optimization, fraud detection</p>
+        </div>
+        <div class="card">
+          <h3>BI</h3>
+          <p>Power BI, Tableau, Looker, KPI dashboards</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education" class="section">
+    <div class="container">
+      <h2>Education</h2>
+      <div class="edu-grid">
+        <div class="edu-item">
+          <div class="edu-title">University at Albany — <span>MS in Data Science</span></div>
+          <div class="edu-meta">Albany, New York • May 2025</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-title">CMR Institute of Technology, Hyderabad — <span>BTech in Computer Science</span></div>
+          <div class="edu-meta">India • May 2022</div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Experience -->
-  <section>
-    <h2>Experience</h2>
-    <div class="experience">
-      <h3>Data Engineer · FedEx (Jan 2025 – Present)</h3>
-      <ul>
-        <li>Developed Databricks ETL pipelines processing 1B+ daily records; reduced runtime by 60%.</li>
-        <li>Automated workflows via Airflow, Step Functions, Jenkins ensuring 99.9% SLA compliance.</li>
-        <li>Implemented Great Expectations & Delta Lake constraints reducing reprocessing by 30%.</li>
-      </ul>
+  <section id="experience" class="section">
+    <div class="container">
+      <h2>Experience</h2>
 
-      <h3>Data Engineer · Knowledge Solutions (Jun 2022 – Jul 2023)</h3>
-      <ul>
-        <li>Built Azure Databricks ETL pipelines (500GB/day), achieving 85% model accuracy in NPS prediction.</li>
-        <li>Automated ADF pipelines and reduced manual ops by 20 hrs/week.</li>
-      </ul>
+      <article class="xp-card">
+        <div class="xp-head">
+          <h3>Data Engineer · FedEx</h3>
+          <div class="xp-meta">Jan 2025 – Present • New Jersey (Remote)</div>
+        </div>
+        <ul>
+          <li>Developed scalable ETL pipelines in Databricks (PySpark, Delta, Python) to ingest & transform <strong>1B+ daily records</strong>; reduced ETL runtime 4–5h → <strong>&lt;2h</strong>.</li>
+          <li>Automated end-to-end workflows using Airflow, Databricks Workflows, AWS Step Functions, Jenkins; achieved <strong>99.9% SLA</strong>.</li>
+          <li>Integrated S3, Glue Catalog, and Redshift; modularized Python components; processed <strong>10–50TB</strong> daily across multi-tenant projects.</li>
+          <li>Implemented Great Expectations & Delta constraints; reduced reprocessing by <strong>30%</strong>; delivered trustworthy features for fraud/delivery optimization.</li>
+          <li>Enforced PII access via IAM & Unity Catalog; CI/CD with Git; saved <strong>20–25% compute</strong> via autoscaling & tuning.</li>
+          <li>Reduced batch query times by <strong>40–50%</strong>; improved streaming latency 2–3 min → <strong>&lt;30s</strong> for near real-time visibility.</li>
+        </ul>
+      </article>
 
-      <h3>Data Engineer · CloudEnd Platform (Jun 2021 – May 2022)</h3>
-      <ul>
-        <li>Created HIPAA-compliant PySpark ETL pipelines; achieved 15% cost reduction & >99.5% uptime.</li>
-      </ul>
+      <article class="xp-card">
+        <div class="xp-head">
+          <h3>Data Engineer · Knowledge Solutions</h3>
+          <div class="xp-meta">Jun 2022 – Jul 2023 • Hyderabad, India</div>
+        </div>
+        <ul>
+          <li>Azure Databricks pipelines for <strong>500GB/day</strong> (15TB/mo); enabled feature engineering for NPS/churn with <strong>85% model accuracy</strong> and +5–7% retention.</li>
+          <li>ADF orchestration; automated on-prem/API to ADLS; −15–20 hrs/wk manual work; −15% compute costs.</li>
+          <li>Azure DevOps CI/CD for notebooks, SSIS, SQL; maintained <strong>&gt;99.5% uptime</strong>, with 30% fewer failed runs.</li>
+          <li>ADLS + Synapse warehousing; optimized partitioning; batch runtime 5h → 3h.</li>
+          <li>Partnered with analytics team; Snowflake tuning improved query performance by <strong>50%</strong>.</li>
+          <li>Power BI KPIs (CSAT, NPS, churn); Azure Monitor & Log Analytics for observability.</li>
+        </ul>
+      </article>
+
+      <article class="xp-card">
+        <div class="xp-head">
+          <h3>Data Engineer · CloudEnd Platform Pvt Ltd</h3>
+          <div class="xp-meta">Jun 2021 – May 2022 • Hyderabad, India</div>
+        </div>
+        <ul>
+          <li>Databricks + AWS Glue + PySpark ETL for healthcare; runtime −30%, HIPAA-compliant, <strong>&gt;99.5% uptime</strong>.</li>
+          <li>Ingested SQL Server, flat files, APIs via SSIS & PySpark; governance via Glue Catalog/Hive Metastore; zero compliance violations.</li>
+          <li>Forecasting with Prophet (Databricks) for adherence/outcomes: <strong>85% accuracy</strong>; enabled 500+ clinical staff to improve completion rates 10–12%.</li>
+          <li>Airflow + Jenkins scheduling; automated alerts; −15–20 hrs/wk manual ops.</li>
+          <li>SQL Server tuning (procs/views/functions); −40% query latency; Power BI dashboards for real-time insights.</li>
+          <li>IAM policies, encryption, role-based permissions; −15% ETL cost via automation & reduced reprocessing.</li>
+        </ul>
+      </article>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section>
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:varshithag1908@gmail.com">varshithag1908@gmail.com</a></p>
-    <p>Location: New Jersey, USA</p>
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="proj-grid">
+        <div class="card">
+          <h3>Real-Time Logistics Tracking</h3>
+          <p>Kinesis + Databricks Streaming + Delta Lake delivering &lt;30s latency for package visibility and SLA alerts.</p>
+        </div>
+        <div class="card">
+          <h3>Customer Retention Analytics</h3>
+          <p>Azure Databricks + PySpark feature engineering; NPS & churn models with +5–7% retention uplift.</p>
+        </div>
+        <div class="card">
+          <h3>Healthcare Adherence Forecasting</h3>
+          <p>Databricks + Prophet predicting patient adherence at 85% accuracy; enabled targeted interventions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connect -->
+  <section id="connect" class="section">
+    <div class="container">
+      <h2>Connect</h2>
+
+      <div class="connect-grid">
+        <div class="card">
+          <h3>Contact</h3>
+          <p>Phone: (518)-528-7072</p>
+          <p>Email: <a href="mailto:varshithag1908@gmail.com">varshithag1908@gmail.com</a></p>
+          <p>Location: USA</p>
+          <p class="links">
+            <a href="#" id="lnkLinkedin2">LinkedIn</a> ·
+            <a href="#" id="lnkPortfolio2">My Portfolio</a> ·
+            <a href="#" id="lnkGithub2">GitHub</a>
+          </p>
+        </div>
+
+        <form class="card form" onsubmit="event.preventDefault(); alert('Thanks! Your message was recorded (demo).');">
+          <h3>Message Me</h3>
+          <input type="text" placeholder="Your name" required/>
+          <input type="email" placeholder="Email" required/>
+          <textarea rows="4" placeholder="Message" required></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
   </section>
 
   <!-- Chatbot -->
-  <div id="chatbot">
-    <div id="chat-window"></div>
-    <div id="chat-input">
-      <input type="text" id="userInput" placeholder="Ask about skills, projects..." />
-      <button onclick="sendMessage()">Send</button>
+  <div id="chatbot" aria-live="polite">
+    <button id="chat-toggle" aria-expanded="false" aria-controls="chat-panel">Chat</button>
+    <div id="chat-panel" hidden>
+      <div id="chat-window"></div>
+      <div id="chat-input">
+        <input type="text" id="userInput" placeholder="Ask about skills, projects..."/>
+        <button id="sendBtn">Send</button>
+      </div>
     </div>
   </div>
 
