@@ -1,459 +1,82 @@
-import React, { useEffect, useRef, useState } from "react";
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Varshitha Gudimalla | Data Engineer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background Animation -->
+  <canvas id="bg-canvas"></canvas>
 
-// === Animated Particles Background ===
-function ParticlesBackground() {
-  const canvasRef = useRef(null);
-  const particlesRef = useRef([]);
-  const animationRef = useRef(null);
-  const density = 0.00008; // particles per pixel
+  <!-- Header -->
+  <header>
+    <h1>Varshitha Gudimalla</h1>
+    <p>Data Engineer | AWS · Azure · Databricks · PySpark</p>
+  </header>
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initParticles();
-    }
-
-    function initParticles() {
-      const count = Math.min(180, Math.floor(canvas.width * canvas.height * density));
-      particlesRef.current = Array.from({ length: count }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        r: Math.random() * 1.8 + 0.7,
-      }));
-    }
-
-    function step() {
-      const parts = particlesRef.current;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // gradient backdrop
-      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      grad.addColorStop(0, "#0c0f14");
-      grad.addColorStop(1, "#12161d");
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // link lines
-      for (let i = 0; i < parts.length; i++) {
-        const p = parts[i];
-        // move
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-        // draw particle
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255,255,255,0.8)";
-        ctx.fill();
-
-        for (let j = i + 1; j < parts.length; j++) {
-          const q = parts[j];
-          const dx = p.x - q.x;
-          const dy = p.y - q.y;
-          const d2 = dx * dx + dy * dy;
-          if (d2 < 120 * 120) {
-            const alpha = 1 - d2 / (120 * 120);
-            ctx.strokeStyle = `rgba(200, 200, 200, ${alpha * 0.25})`;
-            ctx.lineWidth = 0.6;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.stroke();
-          }
-        }
-      }
-      animationRef.current = requestAnimationFrame(step);
-    }
-
-    resize();
-    window.addEventListener("resize", resize);
-    animationRef.current = requestAnimationFrame(step);
-    return () => {
-      window.removeEventListener("resize", resize);
-      cancelAnimationFrame(animationRef.current);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 -z-10 opacity-95"
-      aria-hidden
-    />
-  );
-}
-
-// === Floating Chatbot ===
-function Chatbot() {
-  const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState(() => {
-    try {
-      const saved = localStorage.getItem("vg_chat_msgs");
-      return saved
-        ? JSON.parse(saved)
-        : [
-            { role: "bot", text: "Hi! I’m Varshitha’s assistant. Ask me about skills, experience, projects, or how to contact." },
-          ];
-    } catch {
-      return [
-        { role: "bot", text: "Hi! I’m Varshitha’s assistant. Ask me about skills, experience, projects, or how to contact." },
-      ];
-    }
-  });
-  const [input, setInput] = useState("");
-  const [typing, setTyping] = useState(false);
-  const panelRef = useRef(null);
-
-  useEffect(() => {
-    localStorage.setItem("vg_chat_msgs", JSON.stringify(messages));
-    if (panelRef.current) {
-      panelRef.current.scrollTop = panelRef.current.scrollHeight;
-    }
-  }, [messages, open]);
-
-  function intentReply(q) {
-    const s = q.toLowerCase();
-
-    if (/resume|cv/.test(s))
-      return "You can view or download the resume from the top of the page (Resume button).";
-
-    if (/contact|email|reach|phone/.test(s))
-      return "You can reach Varshitha at varshithag1908@gmail.com or via the Contact form at the bottom.";
-
-    if (/skill|stack|tech|tools?/.test(s))
-      return "Core: Python, SQL, PySpark, Databricks, Airflow, Delta Lake, dbt, Terraform, Jenkins. Cloud: AWS (S3, Glue, Redshift, Kinesis), Azure (ADF, Synapse, ADLS). DW/BI: Snowflake, Redshift, Power BI, Tableau. Data quality: Great Expectations, Unity Catalog.";
-
-    if (/experience|work|fedex|knowledge|cloudend/.test(s))
-      return "3+ years across FedEx (1B+ daily records, 60% runtime cut, 99.9% SLA), Knowledge Solutions (500GB/day Azure Databricks, 85% NPS model accuracy), CloudEnd (HIPAA healthcare ETL, 15% cost reduction).";
-
-    if (/project|portfolio|github/.test(s))
-      return "Featured: Real-time logistics tracking (<30s), Retention analytics (+5–7%), Healthcare adherence forecasting (85% accuracy). GitHub available on request.";
-
-    if (/hire|availability|location|onsite|remote/.test(s))
-      return "Based in NJ (remote). Open to hybrid/onsite. Authorized to work in the US.";
-
-    return "Thanks! I can answer about skills, experience, projects, or contact. Try: ‘What are your AWS skills?’ or ‘Tell me about the FedEx project.’";
-  }
-
-  async function handleSend() {
-    const text = input.trim();
-    if (!text) return;
-    setMessages((m) => [...m, { role: "user", text }]);
-    setInput("");
-    setTyping(true);
-    setTimeout(() => {
-      const reply = intentReply(text);
-      setMessages((m) => [...m, { role: "bot", text: reply }]);
-      setTyping(false);
-    }, 500);
-  }
-
-  return (
-    <>
-      {/* Toggle Button */}
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className=\"fixed bottom-5 right-5 z-40 rounded-full px-5 py-3 shadow-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition\"
-        aria-label={open ? "Close chat" : "Open chat"}
-      >
-        {open ? "Close" : "Chat"}
-      </button>
-
-      {/* Chat Panel */}
-      {open && (
-        <div className="fixed bottom-20 right-5 z-40 w-80 sm:w-96 rounded-2xl shadow-2xl bg-white/95 backdrop-blur border border-slate-200 overflow-hidden">
-          <div className=\"px-4 py-3 bg-slate-800 text-white font-semibold\">Assistant</div>
-          <div ref={panelRef} className="h-72 overflow-y-auto p-3 space-y-2">
-            {messages.map((m, i) => (
-              <div key={i} className={`max-w-[85%] px-3 py-2 rounded-xl text-sm ${m.role === "bot" ? "bg-slate-100 text-slate-800" : "bg-slate-700 text-white ml-auto"}`}>
-                {m.text}
-              </div>
-            ))}
-            {typing && <div className="text-slate-500 text-xs">Assistant is typing…</div>}
-          </div>
-          <div className="flex items-center gap-2 p-2 border-t">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              className="flex-1 rounded-xl border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600"
-              placeholder="Ask about skills, projects, contact…"
-            />
-            <button onClick={handleSend} className="rounded-xl bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 text-sm font-semibold">Send</button>
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
-
-// === Reusable UI ===
-function Metric({ label, value }) {
-  return (
-    <div className="rounded-2xl p-4 bg-white/5 border border-white/10 text-center">
-      <div className="text-2xl md:text-3xl font-extrabold text-white">{value}</div>
-      <div className="text-slate-300 text-sm mt-1">{label}</div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Building Scalable, Real-Time Data Platforms</h2>
+      <p>
+        3+ years designing and optimizing ETL & streaming pipelines across AWS and Azure —
+        transforming 1B+ daily records into business-ready insights.
+      </p>
+      <div class="metrics">
+        <div><strong>1B+</strong><br>Daily Records</div>
+        <div><strong>60%</strong><br>Runtime Reduction</div>
+        <div><strong>99.9%</strong><br>SLA Reliability</div>
+        <div><strong>25%</strong><br>Cost Savings</div>
+      </div>
     </div>
-  );
-}
-
-function Section({ id, title, children }) {
-  return (
-    <section id={id} className="max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-24">
-      <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8">{title}</h2>
-      {children}
-    </section>
-  );
-}
-
-// === Main Portfolio ===
-export default function Portfolio() {
-  return (
-    <div className="relative min-h-screen text-white">
-      <ParticlesBackground />
-      <Chatbot />
-
-      {/* Header */}
-      <header className="sticky top-0 z-30 backdrop-blur bg-slate-900/40 border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
-          <a href="#home" className="font-extrabold text-lg md:text-xl tracking-tight">Varshitha Gudimalla</a>
-          <nav className="hidden md:flex gap-6 text-sm text-slate-200">
-            <a href="#about" className="hover:text-white">About</a>
-            <a href="#experience" className="hover:text-white">Experience</a>
-            <a href="#skills" className="hover:text-white">Skills</a>
-            <a href="#projects" className="hover:text-white">Projects</a>
-            <a href="#contact" className="hover:text-white">Contact</a>
-          </nav>
-          <div className="flex gap-2">
-            <a href="#contact" className="text-sm bg-slate-700 hover:bg-slate-600 px-3 py-2 rounded-xl font-semibold">Hire Me</a>
-            <a href="#resume" className="text-sm bg-white/10 hover:bg-white/15 px-3 py-2 rounded-xl">Resume</a>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero */}
-      <section id="home" className="relative max-w-6xl mx-auto px-6 md:px-10 pt-20 md:pt-28 pb-12">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 text-slate-200 text-xs mb-4">
-              <span>Data Engineer</span>
-              <span>•</span>
-              <span>AWS · Azure · Databricks · PySpark</span>
-            </div>
-            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Building scalable, real‑time data platforms on the cloud.
-            </h1>
-            <p className="text-slate-300 mt-4 md:text-lg">
-              3+ years designing high‑throughput ETL & streaming pipelines on AWS and Azure. Obsessed with performance, data quality, and cost efficiency.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#contact" className="bg-slate-700 hover:bg-slate-600 px-5 py-3 rounded-2xl font-semibold">Let’s Work Together</a>
-              <a href="#projects" className="bg-white/10 hover:bg-white/15 px-5 py-3 rounded-2xl">See Projects</a>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8">
-              <Metric label="Daily Records" value="1B+" />
-              <Metric label="Runtime Reduction" value="60%" />
-              <Metric label="SLA Reliability" value="99.9%" />
-              <Metric label="Cost Savings" value="25%" />
-            </div>
-          </div>
-
-          <div className=\"md:justify-self-end\">
-            <div className=\"mb-4\">
-              <img src=\"/profile.jpg\" alt=\"Varshitha Gudimalla profile\" className=\"w-44 h-44 md:w-56 md:h-56 object-cover rounded-3xl border border-white/20 shadow-xl\" />
-            </div>
-            <div className=\"rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl\">
-              <ul className=\"space-y-3 text-sm text-slate-200\">
-                <li>⚙️ Databricks · PySpark · Delta Lake</li>
-                <li>☁️ AWS (S3, Glue, Redshift, Kinesis) · Azure (ADF, Synapse, ADLS)</li>
-                <li>📦 Airflow · Databricks Workflows · Jenkins · Step Functions</li>
-                <li>🧪 Great Expectations · Unity Catalog · Data Quality</li>
-                <li>📈 Power BI · Tableau · Snowflake</li>
-                <li>🧰 dbt · Terraform · Git · CI/CD</li>
-              </ul>
-            </div>
-          </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <Section id="about" title="About">
-        <div className="prose prose-invert max-w-none">
-          <p>
-            I’m a results‑driven Data Engineer specializing in cloud‑native ETL/ELT and streaming. I turn messy, high‑volume data into reliable, analytics‑ready assets that power critical decisions.
-          </p>
-        </div>
-      </Section>
-
-      {/* Experience */}
-      <Section id="experience" title="Experience">
-        <div className="grid gap-6">
-          {/* FedEx */}
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 className="text-xl font-bold">Data Engineer · FedEx</h3>
-              <p className="text-slate-300 text-sm">Jan 2025 – Present · New Jersey (Remote)</p>
-            </div>
-            <ul className="list-disc ml-5 mt-3 space-y-2 text-slate-200 text-sm">
-              <li>
-                Built Databricks ETL (PySpark, Delta, Python) to ingest & transform <strong>1B+ daily records</strong>, cutting runtime from 4–5 hrs to <strong>&lt;2 hrs</strong>.
-              </li>
-              <li>
-                Automated workflows with Airflow, Databricks Workflows, AWS Step Functions, and Jenkins to hit <strong>99.9% SLA</strong> across prod.
-              </li>
-              <li>
-                Integrated S3, Glue Catalog, and Redshift for enterprise pipelines over <strong>10–50 TB</strong> multi‑tenant data.
-              </li>
-              <li>
-                Implemented Great Expectations, Delta constraints, and schema validation to reduce reprocessing by <strong>30%</strong> and support ML features.
-              </li>
-              <li>
-                Enforced PII access via IAM & Unity Catalog; CI/CD with Git; saved <strong>20–25% compute</strong> via autoscaling & tuning.
-              </li>
-              <li>
-                Improved streaming latency from 2–3 minutes to <strong>&lt;30s</strong> for near real‑time tracking.
-              </li>
-            </ul>
-          </div>
-
-          {/* Knowledge Solutions */}
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 className="text-xl font-bold">Data Engineer · Knowledge Solutions</h3>
-              <p className="text-slate-300 text-sm">Jun 2022 – Jul 2023 · Hyderabad, India</p>
-            </div>
-            <ul className="list-disc ml-5 mt-3 space-y-2 text-slate-200 text-sm">
-              <li>Azure Databricks pipelines for <strong>500GB/day</strong> data (15TB/mo); enabled NPS & churn models at <strong>85% accuracy</strong>.</li>
-              <li>ADF orchestration; automated on‑prem/API to ADLS; reduced manual ops by 15–20 hrs/wk and costs by 15%.</li>
-              <li>Azure DevOps CI/CD for notebooks, SSIS, SQL; maintained <strong>&gt;99.5% uptime</strong> and 30% fewer failed runs.</li>
-              <li>ADLS + Synapse warehousing; optimized partitioning; cut batch runtime 5h → 3h.</li>
-              <li>Partnered with analytics team; Snowflake tuning improved query perf by <strong>50%</strong>.</li>
-              <li>Built Power BI KPIs (CSAT, NPS, churn); Azure Monitor & Logs for observability.</li>
-            </ul>
-          </div>
-
-          {/* CloudEnd */}
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 className="text-xl font-bold">Data Engineer · CloudEnd Platform Pvt Ltd</h3>
-              <p className="text-slate-300 text-sm">Jun 2021 – May 2022 · Hyderabad, India</p>
-            </div>
-            <ul className="list-disc ml-5 mt-3 space-y-2 text-slate-200 text-sm">
-              <li>Databricks + AWS Glue + PySpark ETL for healthcare; runtime −30%, HIPAA compliant, &gt;99.5% uptime.</li>
-              <li>Ingested SQL Server, flat files, APIs with SSIS & PySpark; robust governance via Glue/HMS.</li>
-              <li>Forecasting with Prophet for adherence/outcomes at <strong>85% accuracy</strong>; supported 500+ clinical staff.</li>
-              <li>Airflow + Jenkins scheduling; automated alerts; −15–20 hrs/wk manual ops.</li>
-              <li>SQL Server tuning (procs/views/functions); −40% query latency; Power BI dashboards for real‑time insights.</li>
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* Skills */}
-      <Section id="skills" title="Skills & Tools">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[
-            { h: "Languages", p: "Python, SQL, Bash" },
-            { h: "Data Engineering", p: "PySpark, Spark SQL, Delta Lake, Batch & Streaming" },
-            { h: "Platforms", p: "Databricks, Airflow, Jenkins, Step Functions" },
-            { h: "Cloud (AWS)", p: "S3, Glue, Redshift, Kinesis, IAM" },
-            { h: "Cloud (Azure)", p: "ADF, Synapse, ADLS, Azure DevOps" },
-            { h: "DW/BI", p: "Snowflake, Redshift, Synapse, Power BI, Tableau, dbt" },
-            { h: "Quality & Governance", p: "Great Expectations, Unity Catalog, Schema Validation" },
-            { h: "Infra & CI/CD", p: "Terraform, Git, CI/CD, Monitoring/Logging" },
-          ].map((card, i) => (
-            <div key={i} className="rounded-2xl p-5 bg-white/5 border border-white/10">
-              <div className="font-semibold mb-1">{card.h}</div>
-              <div className="text-slate-300 text-sm">{card.p}</div>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Projects */}
-      <Section id="projects" title="Featured Projects">
-        <div className="grid md:grid-cols-2 gap-6">
-          {[
-            {
-              t: "Real‑Time Logistics Tracking",
-              d: "Kinesis + Databricks Streaming + Delta Lake delivering &lt;30s latency for package visibility and SLA alerts.",
-            },
-            {
-              t: "Customer Retention Analytics",
-              d: "Azure Databricks + PySpark feature engineering; NPS & churn models with +5–7% retention uplift.",
-            },
-            {
-              t: "Healthcare Adherence Forecasting",
-              d: "Databricks + Prophet predicting patient adherence at 85% accuracy; enabled targeted interventions.",
-            },
-            {
-              t: "Cost‑Optimized Lakehouse",
-              d: "Unity Catalog + Great Expectations + autoscaling to cut compute spend 20–25% with 99.9% reliability.",
-            },
-          ].map((p, i) => (
-            <div key={i} className="rounded-2xl p-6 bg-white/5 border border-white/10">
-              <div className="font-bold mb-1">{p.t}</div>
-              <div className="text-slate-300 text-sm">{p.d}</div>
-              <div className="mt-3">
-                <a className="text-slate-300 hover:text-slate-200 text-sm" href="#" onClick={(e)=>e.preventDefault()}>GitHub (upon request)</a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Resume Anchor */}
-      <Section id="resume" title="Resume">
-        <div className="rounded-2xl p-6 bg-white/5 border border-white/10 text-slate-200 text-sm">
-          <p>
-            Need the full details? Download the latest resume. (Wire this to a PDF or Google Drive link when deploying.)
-          </p>
-          <div className="mt-4">
-            <a className="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-xl font-semibold" href="#" onClick={(e)=>e.preventDefault()}>Download Resume</a>
-          </div>
-        </div>
-      </Section>
-
-      {/* Contact */}
-      <Section id="contact" title="Contact">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <div className="font-bold mb-2">Let’s build something data‑driven.</div>
-            <div className="text-slate-300 text-sm">
-              Email: <a className="underline" href="mailto:varshithag1908@gmail.com">varshithag1908@gmail.com</a>
-            </div>
-            <div className="text-slate-300 text-sm mt-1">Location: New Jersey, USA</div>
-          </div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Thanks! Your message has been recorded in this demo form.");
-            }}
-            className="rounded-2xl p-6 bg-white/5 border border-white/10"
-          >
-            <div className="grid gap-3">
-              <input required placeholder="Your name" className="rounded-xl bg-transparent border border-white/20 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-600" />
-              <input type="email" required placeholder="Email" className="rounded-xl bg-transparent border border-white/20 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-600" />
-              <textarea required placeholder="Message" rows={4} className="rounded-xl bg-transparent border border-white/20 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-600" />
-              <button className="justify-self-start bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-2xl font-semibold">Send</button>
-            </div>
-          </form>
-        </div>
-      </Section>
-
-      {/* Footer */}
-      <footer className="text-center text-slate-400 text-xs py-10">
-        © {new Date().getFullYear()} Varshitha Gudimalla · Data Engineer
-      </footer>
+    <div class="hero-photo">
+      <img src="images/profile.jpg" alt="Varshitha Gudimalla Profile" />
     </div>
-  );
-}
+  </section>
+
+  <!-- Experience -->
+  <section>
+    <h2>Experience</h2>
+    <div class="experience">
+      <h3>Data Engineer · FedEx (Jan 2025 – Present)</h3>
+      <ul>
+        <li>Developed Databricks ETL pipelines processing 1B+ daily records; reduced runtime by 60%.</li>
+        <li>Automated workflows via Airflow, Step Functions, Jenkins ensuring 99.9% SLA compliance.</li>
+        <li>Implemented Great Expectations & Delta Lake constraints reducing reprocessing by 30%.</li>
+      </ul>
+
+      <h3>Data Engineer · Knowledge Solutions (Jun 2022 – Jul 2023)</h3>
+      <ul>
+        <li>Built Azure Databricks ETL pipelines (500GB/day), achieving 85% model accuracy in NPS prediction.</li>
+        <li>Automated ADF pipelines and reduced manual ops by 20 hrs/week.</li>
+      </ul>
+
+      <h3>Data Engineer · CloudEnd Platform (Jun 2021 – May 2022)</h3>
+      <ul>
+        <li>Created HIPAA-compliant PySpark ETL pipelines; achieved 15% cost reduction & >99.5% uptime.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section>
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:varshithag1908@gmail.com">varshithag1908@gmail.com</a></p>
+    <p>Location: New Jersey, USA</p>
+  </section>
+
+  <!-- Chatbot -->
+  <div id="chatbot">
+    <div id="chat-window"></div>
+    <div id="chat-input">
+      <input type="text" id="userInput" placeholder="Ask about skills, projects..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script src="ParticlesBackground.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
