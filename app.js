@@ -1,31 +1,65 @@
-// Basic Chatbot
-const chatWindow = document.getElementById("chat-window");
-const userInput = document.getElementById("userInput");
+const canvas = document.getElementById("bg-canvas");
+const ctx = canvas.getContext("2d");
+let particles = [];
+const density = 0.00008;
 
-function addMessage(sender, text) {
-  const div = document.createElement("div");
-  div.textContent = `${sender}: ${text}`;
-  chatWindow.appendChild(div);
-  chatWindow.scrollTop = chatWindow.scrollHeight;
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  initParticles();
 }
 
-function sendMessage() {
-  const text = userInput.value.trim();
-  if (!text) return;
-  addMessage("You", text);
-  userInput.value = "";
-
-  setTimeout(() => {
-    addMessage("Bot", getBotReply(text));
-  }, 500);
+function initParticles() {
+  const count = Math.min(180, Math.floor(canvas.width * canvas.height * density));
+  particles = Array.from({ length: count }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.6,
+    vy: (Math.random() - 0.5) * 0.6,
+    r: Math.random() * 1.8 + 0.7,
+  }));
 }
 
-function getBotReply(msg) {
-  const q = msg.toLowerCase();
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  grad.addColorStop(0, "#0c0f14");
+  grad.addColorStop(1, "#12161d");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  if (q.includes("skill")) return "AWS, Azure, Databricks, PySpark, Airflow, Delta Lake, dbt, Terraform.";
-  if (q.includes("experience")) return "3+ years: FedEx, Knowledge Solutions, CloudEnd Platform.";
-  if (q.includes("project")) return "Real-time logistics, churn prediction, healthcare ETL forecasting.";
-  if (q.includes("contact")) return "You can reach me at varshithag1908@gmail.com.";
-  return "I can tell you about skills, experience, projects, or contact details.";
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(255,255,255,0.8)";
+    ctx.fill();
+
+    for (let j = i + 1; j < particles.length; j++) {
+      const q = particles[j];
+      const dx = p.x - q.x;
+      const dy = p.y - q.y;
+      const d2 = dx * dx + dy * dy;
+      if (d2 < 120 * 120) {
+        const alpha = 1 - d2 / (120 * 120);
+        ctx.strokeStyle = `rgba(200,200,200,${alpha * 0.25})`;
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(q.x, q.y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(draw);
 }
+
+window.addEventListener("resize", resize);
+resize();
+draw();
