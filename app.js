@@ -1,39 +1,34 @@
-// Set your real links here:
+// --- Real Links for Varshitha Gudimalla ---
 const LINKS = {
   github:   "https://github.com/varshitha-g",
   linkedin: "https://www.linkedin.com/in/varshitha-gudimalla-data-engineer/",
-  resume:   "https://your-domain.com/Varshitha_Gudimalla_Resume.pdf",
-  portfolio:"https://varshitha-g.github.io/portfolio/"
+  portfolio:"https://varshitha-g.github.io/portfolio/",
+  resume:   "#" // update this when resume link is ready
 };
 
-// Header icons
-const gh = document.getElementById("ghLink");
-const li = document.getElementById("liLink");
-if (gh) gh.href = LINKS.github;
-if (li) li.href = LINKS.linkedin;
+// Top Icons
+document.getElementById("ghLink").href = LINKS.github;
+document.getElementById("liLink").href = LINKS.linkedin;
 
-// Connect links
-const gh2 = document.getElementById("ghLink2");
-const li2 = document.getElementById("liLink2");
-const pf2 = document.getElementById("pfLink2");
-if (gh2) gh2.href = LINKS.github;
-if (li2) li2.href = LINKS.linkedin;
-if (pf2) pf2.href = LINKS.portfolio;
+// Connect Section Links
+document.getElementById("ghLink2").href = LINKS.github;
+document.getElementById("liLink2").href = LINKS.linkedin;
+document.getElementById("pfLink2").href = LINKS.portfolio;
 
-// Resume button
-const resume = document.getElementById("resumeLink");
-if (resume) resume.href = LINKS.resume;
+// Resume Button
+const resumeBtn = document.getElementById("resumeLink");
+if (resumeBtn) resumeBtn.href = LINKS.resume;
 
-// Smooth scroll for in-page tabs
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener("click", e=>{
-    const id = a.getAttribute("href");
-    if (id && id.length>1) {
+// Smooth Scroll for Tabs
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener("click", e => {
+    const id = link.getAttribute("href");
+    if (id && id.length > 1) {
       e.preventDefault();
-      document.querySelector(id)?.scrollIntoView({behavior:"smooth", block:"start"});
+      document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   });
 });
 
-// Footer year
+// Footer Year
 document.getElementById("yr").textContent = new Date().getFullYear();
