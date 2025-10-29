@@ -1,1133 +1,459 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Varshitha Gudimalla | Data Engineer | AWS Azure Databricks PySpark</title>
-    <meta name="description" content="Data Engineer with 3 years building production ETL/ELT pipelines on AWS and Azure. Expert in PySpark, Databricks, SQL processing 1B+ daily records.">
-    <meta name="keywords" content="Data Engineer, AWS, Azure, Databricks, PySpark, SQL, ETL, Python, Airflow">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.7;
-            color: #1a202c;
-            background: #f7fafc;
-            padding-top: 70px;
-            font-size: 16px;
-        }
-        
-        /* Navigation Bar */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            z-index: 1000;
-            padding: 0;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 30px;
-        }
-        
-        .nav-logo {
-            font-size: 1.3em;
-            font-weight: 700;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-        
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 8px;
-        }
-        
-        .nav-menu li a {
-            text-decoration: none;
-            color: #4b5563;
-            padding: 10px 18px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 0.95em;
-        }
-        
-        .nav-menu li a:hover {
-            background: #eff6ff;
-            color: #2563eb;
-            transform: translateY(-1px);
-        }
-        
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-        
-        .menu-toggle span {
-            width: 26px;
-            height: 3px;
-            background: #3b82f6;
-            border-radius: 3px;
-            transition: all 0.3s;
-        }
-        
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-        
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 25px;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: white;
-            padding: 80px 30px;
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
-            opacity: 0.3;
-        }
-        
-        header > * {
-            position: relative;
-            z-index: 1;
-        }
-        
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 15px;
-            font-weight: 700;
-            letter-spacing: -1px;
-        }
-        
-        header h2 {
-            font-size: 1.4em;
-            font-weight: 400;
-            margin-bottom: 25px;
-            opacity: 0.95;
-        }
-        
-        .header-info {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-        
-        .header-info a {
-            color: white;
-            text-decoration: none;
-            padding: 12px 24px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-weight: 500;
-        }
-        
-        .header-info a:hover {
-            background: rgba(255,255,255,0.25);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        
-        section {
-            background: white;
-            padding: 50px;
-            margin-bottom: 35px;
-            border-radius: 16px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-            border: 1px solid #e5e7eb;
-            transition: all 0.3s ease;
-        }
-        
-        section:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transform: translateY(-2px);
-        }
-        
-        h2 {
-            color: #1a202c;
-            font-size: 2.2em;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #3b82f6;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        
-        h3 {
-            color: #1f2937;
-            font-size: 1.5em;
-            margin-top: 30px;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-        
-        .highlight-box {
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            padding: 40px;
-            border-radius: 12px;
-            border-left: 5px solid #3b82f6;
-            margin-bottom: 35px;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
-        }
-        
-        .highlight-box p {
-            font-size: 1.05em;
-            color: #1e40af;
-            line-height: 1.8;
-        }
-        
-        .highlight-box ul {
-            list-style: none;
-            margin-top: 20px;
-        }
-        
-        .highlight-box li {
-            padding: 12px 0;
-            font-size: 1.05em;
-            color: #1e3a8a;
-        }
-        
-        .highlight-box li:before {
-            content: "✓ ";
-            color: #3b82f6;
-            font-weight: bold;
-            margin-right: 12px;
-            font-size: 1.2em;
-        }
-        
-        .job {
-            margin-bottom: 45px;
-            padding-bottom: 40px;
-            border-bottom: 2px solid #f3f4f6;
-        }
-        
-        .job:last-child {
-            border-bottom: none;
-        }
-        
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 18px;
-        }
-        
-        .job-title {
-            font-size: 1.4em;
-            color: #1a202c;
-            font-weight: 700;
-        }
-        
-        .job-company {
-            font-weight: 700;
-            color: #3b82f6;
-            font-size: 1.1em;
-        }
-        
-        .job-date {
-            color: #6b7280;
-            font-style: italic;
-            font-weight: 500;
-        }
-        
-        .job-subtitle {
-            color: #4b5563;
-            margin-bottom: 20px;
-            font-style: italic;
-            font-size: 1.05em;
-            line-height: 1.6;
-        }
-        
-        .job ul {
-            list-style: none;
-            margin-top: 20px;
-        }
-        
-        .job li {
-            margin-bottom: 20px;
-            padding-left: 25px;
-            position: relative;
-            line-height: 1.7;
-            font-size: 1.02em;
-            color: #374151;
-        }
-        
-        .job li:before {
-            content: "●";
-            position: absolute;
-            left: 0;
-            color: #3b82f6;
-            font-weight: bold;
-            font-size: 1.3em;
-        }
-        
-        .result {
-            color: #1e3a8a;
-            font-weight: 600;
-            margin-top: 8px;
-            padding-left: 18px;
-            line-height: 1.6;
-        }
-        
-        .result:before {
-            content: "→ ";
-            color: #3b82f6;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-        
-        .tech-tag {
-            display: inline-block;
-            background: #dbeafe;
-            color: #1e40af;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin: 6px 6px 6px 0;
-            font-weight: 500;
-            border: 1px solid #bfdbfe;
-            transition: all 0.2s ease;
-        }
-        
-        .tech-tag:hover {
-            background: #3b82f6;
-            color: white;
-            transform: translateY(-1px);
-        }
-        
-        .project-card {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            padding: 35px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            border-left: 5px solid #3b82f6;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
-        }
-        
-        .project-card h4 {
-            color: #3b82f6;
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        
-        .project-label {
-            font-weight: 700;
-            color: #1f2937;
-            margin-top: 15px;
-            font-size: 1.05em;
-        }
-        
-        .project-card p {
-            line-height: 1.7;
-            color: #4b5563;
-        }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
-        }
-        
-        .skill-category {
-            background: #f8fafc;
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid #e5e7eb;
-            transition: all 0.3s ease;
-        }
-        
-        .skill-category:hover {
-            background: #eff6ff;
-            border-color: #3b82f6;
-            transform: translateY(-3px);
-        }
-        
-        .skill-category h4 {
-            color: #3b82f6;
-            margin-bottom: 12px;
-            font-size: 1.15em;
-            font-weight: 700;
-        }
-        
-        .skill-category p {
-            line-height: 1.9;
-            color: #4b5563;
-        }
-        
-        .timeline {
-            margin-top: 30px;
-        }
-        
-        .timeline-item {
-            padding: 20px 0;
-            border-left: 4px solid #3b82f6;
-            padding-left: 35px;
-            margin-left: 15px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .timeline-item:hover {
-            border-left-color: #1e40af;
-        }
-        
-        .timeline-item:before {
-            content: "";
-            width: 18px;
-            height: 18px;
-            background: #3b82f6;
-            border-radius: 50%;
-            position: absolute;
-            left: -11px;
-            top: 25px;
-            box-shadow: 0 0 0 4px #dbeafe;
-        }
-        
-        .timeline-year {
-            font-weight: 700;
-            color: #3b82f6;
-            margin-bottom: 8px;
-            font-size: 1.1em;
-        }
-        
-        .timeline-item p {
-            color: #4b5563;
-            line-height: 1.7;
-        }
-        
-        /* Journey Timeline Styles - Horizontal with visible content */
-        .journey-timeline {
-            position: relative;
-            padding: 40px 0 80px;
-            overflow-x: auto;
-            overflow-y: visible;
-        }
-        
-        .journey-timeline::-webkit-scrollbar {
-            height: 8px;
-        }
-        
-        .journey-timeline::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 10px;
-        }
-        
-        .journey-timeline::-webkit-scrollbar-thumb {
-            background: #3b82f6;
-            border-radius: 10px;
-        }
-        
-        .journey-items-wrapper {
-            display: flex;
-            gap: 50px;
-            position: relative;
-            padding: 0 40px;
-            min-width: min-content;
-        }
-        
-        /* Horizontal connecting line */
-        .journey-items-wrapper:before {
-            content: "";
-            position: absolute;
-            left: 60px;
-            right: 60px;
-            top: 85px;
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #3b82f6 100%);
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-            z-index: 1;
-        }
-        
-        .journey-item {
-            position: relative;
-            z-index: 2;
-            min-width: 240px;
-            max-width: 280px;
-        }
-        
-        .journey-visible {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .journey-year-label {
-            font-weight: 700;
-            color: #3b82f6;
-            font-size: 1.05em;
-            text-align: center;
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            border-radius: 20px;
-            border: 2px solid #3b82f6;
-            white-space: nowrap;
-        }
-        
-        .journey-point {
-            width: 24px;
-            height: 24px;
-            background: white;
-            border: 4px solid #3b82f6;
-            border-radius: 50%;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .journey-point:after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px solid #3b82f6;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.8;
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(2);
-                opacity: 0;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0;
-            }
-        }
-        
-        .journey-item:hover .journey-point {
-            width: 32px;
-            height: 32px;
-            border-width: 5px;
-            background: #3b82f6;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5);
-            transform: scale(1.2);
-        }
-        
-        .journey-main-text {
-            text-align: center;
-            color: #1f2937;
-            line-height: 1.6;
-            font-size: 0.95em;
-            font-weight: 500;
-            margin: 10px 0 0 0;
-        }
-        
-        .journey-content {
-            position: absolute;
-            bottom: 130px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: white;
-            padding: 25px 30px;
-            border-radius: 16px;
-            border: 2px solid #3b82f6;
-            min-width: 320px;
-            max-width: 380px;
-            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.25);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 100;
-        }
-        
-        .journey-content:before {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 10px solid white;
-            filter: drop-shadow(0 2px 2px rgba(59, 130, 246, 0.2));
-        }
-        
-        .journey-content:after {
-            content: "";
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 12px solid transparent;
-            border-right: 12px solid transparent;
-            border-top: 12px solid #3b82f6;
-            z-index: -1;
-        }
-        
-        .journey-item:hover .journey-content {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-        
-        .journey-content h3 {
-            color: #1a202c;
-            font-size: 1.25em;
-            margin: 0 0 12px 0;
-            font-weight: 700;
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .journey-content p {
-            color: #4b5563;
-            line-height: 1.7;
-            margin: 0;
-            font-size: 0.95em;
-        }
-        
-        .impact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-        
-        .impact-card {
-            text-align: center;
-            padding: 35px 25px;
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            border-radius: 12px;
-            border: 1px solid #bfdbfe;
-            transition: all 0.3s ease;
-        }
-        
-        .impact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.15);
-        }
-        
-        .impact-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-        
-        .impact-value {
-            font-size: 1.6em;
-            font-weight: 700;
-            color: #1e40af;
-            margin-bottom: 8px;
-        }
-        
-        .impact-label {
-            color: #4b5563;
-            font-size: 0.95em;
-            line-height: 1.5;
-        }
-        
-        .cta-section {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: white;
-            text-align: center;
-            padding: 60px 50px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-        }
-        
-        .cta-section h2 {
-            color: white;
-            border: none;
-            margin-bottom: 25px;
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 35px;
-            margin-top: 35px;
-        }
-        
-        .contact-item h4 {
-            margin-bottom: 12px;
-            font-weight: 700;
-            font-size: 1.1em;
-        }
-        
-        .contact-item p {
-            line-height: 1.8;
-            opacity: 0.95;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #6b7280;
-            font-size: 0.95em;
-            line-height: 1.7;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding-top: 60px;
-            }
-            
-            .menu-toggle {
-                display: flex;
-            }
-            
-            .nav-menu {
-                position: fixed;
-                top: 60px;
-                left: -100%;
-                width: 100%;
-                flex-direction: column;
-                background: white;
-                padding: 20px;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-                transition: left 0.3s;
-                gap: 0;
-            }
-            
-            .nav-menu.active {
-                left: 0;
-            }
-            
-            .nav-menu li {
-                width: 100%;
-            }
-            
-            .nav-menu li a {
-                display: block;
-                padding: 15px;
-                border-bottom: 1px solid #eee;
-            }
-            
-            header h1 {
-                font-size: 2em;
-            }
-            
-            header h2 {
-                font-size: 1.2em;
-            }
-            
-            section {
-                padding: 25px;
-            }
-            
-            .job-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .skills-grid,
-            .impact-grid,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="nav-logo">Varshitha Gudimalla</a>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#journey" onclick="closeMenu()">Journey</a></li>
-                <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
-                <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
-                <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
-                <li><a href="#education" onclick="closeMenu()">Education</a></li>
-                <li><a href="#connect" onclick="closeMenu()">Let's Connect</a></li>
-            </ul>
+import React, { useEffect, useRef, useState } from "react";
+
+// === Animated Particles Background ===
+function ParticlesBackground() {
+  const canvasRef = useRef(null);
+  const particlesRef = useRef([]);
+  const animationRef = useRef(null);
+  const density = 0.00008; // particles per pixel
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    }
+
+    function initParticles() {
+      const count = Math.min(180, Math.floor(canvas.width * canvas.height * density));
+      particlesRef.current = Array.from({ length: count }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        r: Math.random() * 1.8 + 0.7,
+      }));
+    }
+
+    function step() {
+      const parts = particlesRef.current;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // gradient backdrop
+      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      grad.addColorStop(0, "#0c0f14");
+      grad.addColorStop(1, "#12161d");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // link lines
+      for (let i = 0; i < parts.length; i++) {
+        const p = parts[i];
+        // move
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        // draw particle
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,0.8)";
+        ctx.fill();
+
+        for (let j = i + 1; j < parts.length; j++) {
+          const q = parts[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < 120 * 120) {
+            const alpha = 1 - d2 / (120 * 120);
+            ctx.strokeStyle = `rgba(200, 200, 200, ${alpha * 0.25})`;
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.stroke();
+          }
+        }
+      }
+      animationRef.current = requestAnimationFrame(step);
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+    animationRef.current = requestAnimationFrame(step);
+    return () => {
+      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 -z-10 opacity-95"
+      aria-hidden
+    />
+  );
+}
+
+// === Floating Chatbot ===
+function Chatbot() {
+  const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState(() => {
+    try {
+      const saved = localStorage.getItem("vg_chat_msgs");
+      return saved
+        ? JSON.parse(saved)
+        : [
+            { role: "bot", text: "Hi! I’m Varshitha’s assistant. Ask me about skills, experience, projects, or how to contact." },
+          ];
+    } catch {
+      return [
+        { role: "bot", text: "Hi! I’m Varshitha’s assistant. Ask me about skills, experience, projects, or how to contact." },
+      ];
+    }
+  });
+  const [input, setInput] = useState("");
+  const [typing, setTyping] = useState(false);
+  const panelRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem("vg_chat_msgs", JSON.stringify(messages));
+    if (panelRef.current) {
+      panelRef.current.scrollTop = panelRef.current.scrollHeight;
+    }
+  }, [messages, open]);
+
+  function intentReply(q) {
+    const s = q.toLowerCase();
+
+    if (/resume|cv/.test(s))
+      return "You can view or download the resume from the top of the page (Resume button).";
+
+    if (/contact|email|reach|phone/.test(s))
+      return "You can reach Varshitha at varshithag1908@gmail.com or via the Contact form at the bottom.";
+
+    if (/skill|stack|tech|tools?/.test(s))
+      return "Core: Python, SQL, PySpark, Databricks, Airflow, Delta Lake, dbt, Terraform, Jenkins. Cloud: AWS (S3, Glue, Redshift, Kinesis), Azure (ADF, Synapse, ADLS). DW/BI: Snowflake, Redshift, Power BI, Tableau. Data quality: Great Expectations, Unity Catalog.";
+
+    if (/experience|work|fedex|knowledge|cloudend/.test(s))
+      return "3+ years across FedEx (1B+ daily records, 60% runtime cut, 99.9% SLA), Knowledge Solutions (500GB/day Azure Databricks, 85% NPS model accuracy), CloudEnd (HIPAA healthcare ETL, 15% cost reduction).";
+
+    if (/project|portfolio|github/.test(s))
+      return "Featured: Real-time logistics tracking (<30s), Retention analytics (+5–7%), Healthcare adherence forecasting (85% accuracy). GitHub available on request.";
+
+    if (/hire|availability|location|onsite|remote/.test(s))
+      return "Based in NJ (remote). Open to hybrid/onsite. Authorized to work in the US.";
+
+    return "Thanks! I can answer about skills, experience, projects, or contact. Try: ‘What are your AWS skills?’ or ‘Tell me about the FedEx project.’";
+  }
+
+  async function handleSend() {
+    const text = input.trim();
+    if (!text) return;
+    setMessages((m) => [...m, { role: "user", text }]);
+    setInput("");
+    setTyping(true);
+    setTimeout(() => {
+      const reply = intentReply(text);
+      setMessages((m) => [...m, { role: "bot", text: reply }]);
+      setTyping(false);
+    }, 500);
+  }
+
+  return (
+    <>
+      {/* Toggle Button */}
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className=\"fixed bottom-5 right-5 z-40 rounded-full px-5 py-3 shadow-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition\"
+        aria-label={open ? "Close chat" : "Open chat"}
+      >
+        {open ? "Close" : "Chat"}
+      </button>
+
+      {/* Chat Panel */}
+      {open && (
+        <div className="fixed bottom-20 right-5 z-40 w-80 sm:w-96 rounded-2xl shadow-2xl bg-white/95 backdrop-blur border border-slate-200 overflow-hidden">
+          <div className=\"px-4 py-3 bg-slate-800 text-white font-semibold\">Assistant</div>
+          <div ref={panelRef} className="h-72 overflow-y-auto p-3 space-y-2">
+            {messages.map((m, i) => (
+              <div key={i} className={`max-w-[85%] px-3 py-2 rounded-xl text-sm ${m.role === "bot" ? "bg-slate-100 text-slate-800" : "bg-slate-700 text-white ml-auto"}`}>
+                {m.text}
+              </div>
+            ))}
+            {typing && <div className="text-slate-500 text-xs">Assistant is typing…</div>}
+          </div>
+          <div className="flex items-center gap-2 p-2 border-t">
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              className="flex-1 rounded-xl border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600"
+              placeholder="Ask about skills, projects, contact…"
+            />
+            <button onClick={handleSend} className="rounded-xl bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 text-sm font-semibold">Send</button>
+          </div>
         </div>
-    </nav>
-    <header>
-        <div class="container">
-            <h1>Varshitha Gudimalla</h1>
-            <h2>Data Engineer | AWS | Azure | Databricks | PySpark</h2>
-            <p><strong>Currently:</strong> Building real-time data platforms at FedEx</p>
-            <div class="header-info">
-                <a href="mailto:varshithag1908@gmail.com">Email</a>
-                <a href="https://linkedin.com/in/varshitha-gudimalla-data-engineer" target="_blank">LinkedIn</a>
-                <a href="https://github.com/varshitha-g" target="_blank">GitHub</a>
-            </div>
-        </div>
-    </header>
+      )}
+    </>
+  );
+}
 
-    <div class="container">
-        <section id="journey">
-            <h2>Career Timeline</h2>
-            <div class="journey-timeline">
-                <div class="journey-items-wrapper">
-                     <div class="journey-item">
-                        <div class="journey-visible">
-                            <div class="journey-year-label">2018 - 2022</div>
-                            <div class="journey-point"></div>
-                            <p class="journey-main-text">Computer Science degree at CMR Institute, discovered passion for data engineering</p>
-                        </div>
-                        <div class="journey-content">
-                            <h3>The Beginning</h3>
-                            <p>Bachelor of Technology in Computer Science from CMR Institute of Technology, Hyderabad. First exposure to Python, data structures, and algorithms. Discovered passion for data engineering through coursework in database systems and distributed computing.</p>
-                        </div>
-                    </div>
-                    <div class="journey-item">
-                        <div class="journey-visible">
-                            <div class="journey-year-label">2021 - 2022</div>
-                            <div class="journey-point"></div>
-                            <p class="journey-main-text">Built HIPAA-compliant healthcare data infrastructure at CloudEnd Platform</p>
-                        </div>
-                        <div class="journey-content">
-                            <h3>Healthcare Data Engineering</h3>
-                            <p>Architected secure AWS data lake processing 100K+ patient records monthly with zero HIPAA violations. Developed predictive analytics achieving 85% accuracy, enabling 500+ therapists to improve treatment completion 10-12%.</p>
-                        </div>
-                    </div>
-                    <div class="journey-item">
-                        <div class="journey-visible">
-                            <div class="journey-year-label">2022 - 2023</div>
-                            <div class="journey-point"></div>
-                            <p class="journey-main-text">Revolutionized customer analytics at Knowledge Solutions, processed 15TB monthly</p>
-                        </div>
-                        <div class="journey-content">
-                            <h3>E-Commerce Analytics Revolution</h3>
-                            <p>Migrated 15TB monthly to Azure cloud platform. Built PySpark ML pipelines achieving 85% churn prediction accuracy, retaining $4.8M revenue. Optimized Snowflake warehouse improving query performance 50% while reducing costs 15%.</p>
-                        </div>
-                    </div>
-                    <div class="journey-item">
-                        <div class="journey-visible">
-                            <div class="journey-year-label">2023 - 2025</div>
-                            <div class="journey-point"></div>
-                            <p class="journey-main-text">Completed MS in Data Science at University at Albany while working full-time</p>
-                        </div>
-                        <div class="journey-content">
-                            <h3>Graduate Education</h3>
-                            <p>Earned Master of Science in Data Science while working full-time as a Data Engineer. Focused on advanced machine learning, big data analytics, and cloud computing. Applied academic research directly to production systems, bridging theory and practice.</p>
-                        </div>
-                    </div>
-                    <div class="journey-item">
-                        <div class="journey-visible">
-                            <div class="journey-year-label">2025 - Present</div>
-                            <div class="journey-point"></div>
-                            <p class="journey-main-text">Transforming logistics data at FedEx</p>
-                        </div>
-                        <div class="journey-content">
-                            <h3>Current Mission at FedEx</h3>
-                            <p>Building real-time logistics data platform processing 1B+ daily records. Engineered AWS lakehouse reducing ETL time from 5 hours to 2 hours. Implemented streaming pipeline with 99.9% reliability, enabling fraud detection that prevented $2M+ annual losses.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        
-
-       <section id="experience">
-            <h2>Professional Experience</h2>
-            
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <span class="job-title">Data Engineer</span> | 
-                        <span class="job-company">FedEx</span>
-                    </div>
-                    <span class="job-date">Jan 2025 – Present</span>
-                </div>
-                <p class="job-subtitle"><strong>Building:</strong> Real-time logistics data platform serving 40+ analytics and ML teams</p>
-                <ul>
-                    <li>AWS lakehouse processing <strong>10-50TB daily</strong> (S3 + Glue + Redshift)
-                        <div class="result">Cut ETL time from 5 hours to 2 hours</div>
-                    </li>
-                    <li>Real-time streaming with Kinesis processing <strong>200M+ events daily</strong>
-                        <div class="result">Reduced tracking latency from 3 min to 30 sec, enabled fraud detection saving <strong>$2M annually</strong></div>
-                    </li>
-                    <li>50+ Airflow DAGs with automated monitoring
-                        <div class="result">Achieved <strong>99.9% reliability</strong></div>
-                    </li>
-                    <li>Data quality framework with Great Expectations
-                        <div class="result">Caught 15K+ anomalies monthly, passed SOC 2 audit</div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <span class="job-title">Data Engineer</span> | 
-                        <span class="job-company">Knowledge Solutions</span>
-                    </div>
-                    <span class="job-date">Jun 2022 – Jul 2023</span>
-                </div>
-                <p class="job-subtitle"><strong>Challenge:</strong> E-commerce client had fragmented data across 12 systems, no churn prediction capability</p>
-                <ul>
-                    <li>Azure platform migrating <strong>15TB monthly</strong> (ADF + ADLS + Synapse)
-                        <div class="result">Reduced reports from 45 min to 8 min, saved <strong>$180K annually</strong></div>
-                    </li>
-                    <li>PySpark ML pipelines creating 120+ features
-                        <div class="result"><strong>85% churn prediction accuracy</strong>, retained <strong>$4.8M revenue</strong></div>
-                    </li>
-                    <li>Snowflake optimization (materialized views + caching)
-                        <div class="result">50% faster queries, 15% cost reduction</div>
-                    </li>
-                    <li>Azure DevOps CI/CD
-                        <div class="result">65% fewer errors, 2-week to 3-day releases</div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <span class="job-title">Data Engineer</span> | 
-                        <span class="job-company">CloudEnd Platform</span>
-                    </div>
-                    <span class="job-date">Jun 2021 – May 2022</span>
-                </div>
-                <p class="job-subtitle"><strong>Mission:</strong> HIPAA-compliant analytics for mental health platform (100K+ patients)</p>
-                <ul>
-                    <li>AWS data lake with encryption and PHI de-identification
-                        <div class="result"><strong>Zero HIPAA violations</strong> during audit</div>
-                    </li>
-                    <li>Patient adherence forecasting (Python + Prophet)
-                        <div class="result"><strong>85% accuracy</strong>, helped 500+ therapists improve completion <strong>10-12%</strong></div>
-                    </li>
-                    <li>20+ Airflow DAGs with PagerDuty alerting
-                        <div class="result">Cut resolution from 4 hours to 30 min</div>
-                    </li>
-                    <li>SQL Server optimization
-                        <div class="result">Reduced queries from 5 min to 40 sec</div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            
-            <div class="project-card">
-                <h4>Real-Time Economic Intelligence Platform</h4>
-                <p class="project-label">Problem:</p>
-                <p>Analysts spending 5 days manually compiling inflation data from 190+ countries</p>
-                
-                <p class="project-label">Solution:</p>
-                <p>Built Spark + Snowflake pipeline processing 2M+ daily economic indicators from government/financial APIs</p>
-                
-                <p class="project-label">Result:</p>
-                <p>80% time reduction (5 days → 4 hours), enabling faster policy decisions</p>
-                
-                <p class="project-label">Tech:</p>
-                <span class="tech-tag">PySpark</span>
-                <span class="tech-tag">Snowflake</span>
-                <span class="tech-tag">REST APIs</span>
-                <span class="tech-tag">Airflow</span>
-                <span class="tech-tag">Python</span>
-            </div>
-
-            <div class="project-card">
-                <h4>ML-Powered Customer Retention System</h4>
-                <p class="project-label">Problem:</p>
-                <p>Telecom losing 25% of customers annually with no early warning system</p>
-                
-                <p class="project-label">Solution:</p>
-                <p>End-to-end ML pipeline analyzing 500K+ customer behavioral patterns with automated scoring</p>
-                
-                <p class="project-label">Result:</p>
-                <p>87% prediction accuracy identifying at-risk customers 60 days early, saved <strong>$2.3M annually</strong></p>
-                
-                <p class="project-label">Tech:</p>
-                <span class="tech-tag">PySpark</span>
-                <span class="tech-tag">Databricks</span>
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">scikit-learn</span>
-                <span class="tech-tag">Airflow</span>
-                <span class="tech-tag">Delta Lake</span>
-            </div>
-        </section>
-
-        <section id="skills">
-            <h2>Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4>Cloud Platforms</h4>
-                    <p>AWS (S3, Glue, Redshift, Kinesis, Lambda, EMR, Athena) • Azure (Databricks, Data Factory, Synapse, ADLS Gen2) • Snowflake</p>
-                </div>
-                <div class="skill-category">
-                    <h4>Big Data & Processing</h4>
-                    <p>PySpark • Apache Spark • Spark SQL • Delta Lake • Hadoop • Hive • Spark Streaming</p>
-                </div>
-                <div class="skill-category">
-                    <h4>Programming</h4>
-                    <p>Python (Pandas, NumPy, scikit-learn) • SQL (Advanced) • Scala</p>
-                </div>
-                <div class="skill-category">
-                    <h4>Data Architecture</h4>
-                    <p>ETL/ELT Pipelines • Data Lakes • Data Warehouses • CDC • SCD Type-2 • Star Schema</p>
-                </div>
-                <div class="skill-category">
-                    <h4>Orchestration & Streaming</h4>
-                    <p>Apache Airflow • Apache Kafka • AWS Kinesis • Jenkins</p>
-                </div>
-                <div class="skill-category">
-                    <h4>DevOps & Quality</h4>
-                    <p>Git/GitHub • CI/CD • Docker • Terraform • Great Expectations • HIPAA/GDPR Compliance</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="education">
-            <h2>Education</h2>
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <span class="job-title">Master of Science in Data Science</span>
-                    </div>
-                    <span class="job-date">May 2025</span>
-                </div>
-                <p>University at Albany, NY</p>
-            </div>
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <span class="job-title">Bachelor of Technology in Computer Science</span>
-                    </div>
-                    <span class="job-date">May 2022</span>
-                </div>
-                <p>CMR Institute of Technology, India</p>
-            </div>
-        </section>
-
-       
-
-        <section id="connect" class="cta-section">
-            <h2>Let's Connect</h2>
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <h4>Looking for:</h4>
-                    <p>Data Engineer roles focused on AWS, Azure, Databricks, and real-time data processing</p>
-                </div>
-                <div class="contact-item">
-                    <h4>Available for:</h4>
-                    <p>Full-time opportunities, contract projects, technical consultations</p>
-                </div>
-                
-                <div class="contact-item">
-                    <h4>Location:</h4>
-                    <p>Open to remote nationwide • Available to relocate</p>
-                </div>
-            </div>
-            <div style="margin-top: 40px;">
-                <a href="mailto:varshithag1908@gmail.com" style="display: inline-block; background: white; color: #667eea; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px;"> Email Me</a>
-                <a href="https://linkedin.com/in/varshitha-gudimalla-data-engineer" target="_blank" style="display: inline-block; background: white; color: #667eea; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px;"> LinkedIn</a>
-                <a href="https://github.com/varshitha-g" target="_blank" style="display: inline-block; background: white; color: #667eea; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px;"> GitHub</a>
-            </div>
-        </section>
+// === Reusable UI ===
+function Metric({ label, value }) {
+  return (
+    <div className="rounded-2xl p-4 bg-white/5 border border-white/10 text-center">
+      <div className="text-2xl md:text-3xl font-extrabold text-white">{value}</div>
+      <div className="text-slate-300 text-sm mt-1">{label}</div>
     </div>
+  );
+}
 
-    <footer>
-        <p><em>Currently employed at FedEx. Actively exploring new opportunities to drive data-driven business impact.</em></p>
-        <p style="margin-top: 10px;">© 2025 Varshitha Gudimalla. All rights reserved.</p>
-    </footer>
+function Section({ id, title, children }) {
+  return (
+    <section id={id} className="max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-24">
+      <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8">{title}</h2>
+      {children}
+    </section>
+  );
+}
 
-    <script>
-        function toggleMenu() {
-            const navMenu = document.getElementById('navMenu');
-            const menuToggle = document.querySelector('.menu-toggle');
-            navMenu.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        }
+// === Main Portfolio ===
+export default function Portfolio() {
+  return (
+    <div className="relative min-h-screen text-white">
+      <ParticlesBackground />
+      <Chatbot />
 
-        function closeMenu() {
-            const navMenu = document.getElementById('navMenu');
-            const menuToggle = document.querySelector('.menu-toggle');
-            navMenu.classList.remove('active');
-            menuToggle.classList.remove('active');
-        }
+      {/* Header */}
+      <header className="sticky top-0 z-30 backdrop-blur bg-slate-900/40 border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
+          <a href="#home" className="font-extrabold text-lg md:text-xl tracking-tight">Varshitha Gudimalla</a>
+          <nav className="hidden md:flex gap-6 text-sm text-slate-200">
+            <a href="#about" className="hover:text-white">About</a>
+            <a href="#experience" className="hover:text-white">Experience</a>
+            <a href="#skills" className="hover:text-white">Skills</a>
+            <a href="#projects" className="hover:text-white">Projects</a>
+            <a href="#contact" className="hover:text-white">Contact</a>
+          </nav>
+          <div className="flex gap-2">
+            <a href="#contact" className="text-sm bg-slate-700 hover:bg-slate-600 px-3 py-2 rounded-xl font-semibold">Hire Me</a>
+            <a href="#resume" className="text-sm bg-white/10 hover:bg-white/15 px-3 py-2 rounded-xl">Resume</a>
+          </div>
+        </div>
+      </header>
 
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navMenu = document.getElementById('navMenu');
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navContainer = document.querySelector('.nav-container');
-            
-            if (!navContainer.contains(event.target)) {
-                navMenu.classList.remove('active');
-                menuToggle.classList.remove('active');
-            }
-        });
-    </script>
-</body>
-</html>
+      {/* Hero */}
+      <section id="home" className="relative max-w-6xl mx-auto px-6 md:px-10 pt-20 md:pt-28 pb-12">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 text-slate-200 text-xs mb-4">
+              <span>Data Engineer</span>
+              <span>•</span>
+              <span>AWS · Azure · Databricks · PySpark</span>
+            </div>
+            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
+              Building scalable, real‑time data platforms on the cloud.
+            </h1>
+            <p className="text-slate-300 mt-4 md:text-lg">
+              3+ years designing high‑throughput ETL & streaming pipelines on AWS and Azure. Obsessed with performance, data quality, and cost efficiency.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href="#contact" className="bg-slate-700 hover:bg-slate-600 px-5 py-3 rounded-2xl font-semibold">Let’s Work Together</a>
+              <a href="#projects" className="bg-white/10 hover:bg-white/15 px-5 py-3 rounded-2xl">See Projects</a>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8">
+              <Metric label="Daily Records" value="1B+" />
+              <Metric label="Runtime Reduction" value="60%" />
+              <Metric label="SLA Reliability" value="99.9%" />
+              <Metric label="Cost Savings" value="25%" />
+            </div>
+          </div>
+
+          <div className=\"md:justify-self-end\">
+            <div className=\"mb-4\">
+              <img src=\"/profile.jpg\" alt=\"Varshitha Gudimalla profile\" className=\"w-44 h-44 md:w-56 md:h-56 object-cover rounded-3xl border border-white/20 shadow-xl\" />
+            </div>
+            <div className=\"rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl\">
+              <ul className=\"space-y-3 text-sm text-slate-200\">
+                <li>⚙️ Databricks · PySpark · Delta Lake</li>
+                <li>☁️ AWS (S3, Glue, Redshift, Kinesis) · Azure (ADF, Synapse, ADLS)</li>
+                <li>📦 Airflow · Databricks Workflows · Jenkins · Step Functions</li>
+                <li>🧪 Great Expectations · Unity Catalog · Data Quality</li>
+                <li>📈 Power BI · Tableau · Snowflake</li>
+                <li>🧰 dbt · Terraform · Git · CI/CD</li>
+              </ul>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <Section id="about" title="About">
+        <div className="prose prose-invert max-w-none">
+          <p>
+            I’m a results‑driven Data Engineer specializing in cloud‑native ETL/ELT and streaming. I turn messy, high‑volume data into reliable, analytics‑ready assets that power critical decisions.
+          </p>
+        </div>
+      </Section>
+
+      {/* Experience */}
+      <Section id="experience" title="Experience">
+        <div className="grid gap-6">
+          {/* FedEx */}
+          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-xl font-bold">Data Engineer · FedEx</h3>
+              <p className="text-slate-300 text-sm">Jan 2025 – Present · New Jersey (Remote)</p>
+            </div>
+            <ul className="list-disc ml-5 mt-3 space-y-2 text-slate-200 text-sm">
+              <li>
+                Built Databricks ETL (PySpark, Delta, Python) to ingest & transform <strong>1B+ daily records</strong>, cutting runtime from 4–5 hrs to <strong>&lt;2 hrs</strong>.
+              </li>
+              <li>
+                Automated workflows with Airflow, Databricks Workflows, AWS Step Functions, and Jenkins to hit <strong>99.9% SLA</strong> across prod.
+              </li>
+              <li>
+                Integrated S3, Glue Catalog, and Redshift for enterprise pipelines over <strong>10–50 TB</strong> multi‑tenant data.
+              </li>
+              <li>
+                Implemented Great Expectations, Delta constraints, and schema validation to reduce reprocessing by <strong>30%</strong> and support ML features.
+              </li>
+              <li>
+                Enforced PII access via IAM & Unity Catalog; CI/CD with Git; saved <strong>20–25% compute</strong> via autoscaling & tuning.
+              </li>
+              <li>
+                Improved streaming latency from 2–3 minutes to <strong>&lt;30s</strong> for near real‑time tracking.
+              </li>
+            </ul>
+          </div>
+
+          {/* Knowledge Solutions */}
+          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-xl font-bold">Data Engineer · Knowledge Solutions</h3>
+              <p className="text-slate-300 text-sm">Jun 2022 – Jul 2023 · Hyderabad, India</p>
+            </div>
+            <ul className="list-disc ml-5 mt-3 space-y-2 text-slate-200 text-sm">
+              <li>Azure Databricks pipelines for <strong>500GB/day</strong> data (15TB/mo); enabled NPS & churn models at <strong>85% accuracy</strong>.</li>
+              <li>ADF orchestration; automated on‑prem/API to ADLS; reduced manual ops by 15–20 hrs/wk and costs by 15%.</li>
+              <li>Azure DevOps CI/CD for notebooks, SSIS, SQL; maintained <strong>&gt;99.5% uptime</strong> and 30% fewer failed runs.</li>
+              <li>ADLS + Synapse warehousing; optimized partitioning; cut batch runtime 5h → 3h.</li>
+              <li>Partnered with analytics team; Snowflake tuning improved query perf by <strong>50%</strong>.</li>
+              <li>Built Power BI KPIs (CSAT, NPS, churn); Azure Monitor & Logs for observability.</li>
+            </ul>
+          </div>
+
+          {/* CloudEnd */}
+          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-xl font-bold">Data Engineer · CloudEnd Platform Pvt Ltd</h3>
+              <p className="text-slate-300 text-sm">Jun 2021 – May 2022 · Hyderabad, India</p>
+            </div>
+            <ul className="list-disc ml-5 mt-3 space-y-2 text-slate-200 text-sm">
+              <li>Databricks + AWS Glue + PySpark ETL for healthcare; runtime −30%, HIPAA compliant, &gt;99.5% uptime.</li>
+              <li>Ingested SQL Server, flat files, APIs with SSIS & PySpark; robust governance via Glue/HMS.</li>
+              <li>Forecasting with Prophet for adherence/outcomes at <strong>85% accuracy</strong>; supported 500+ clinical staff.</li>
+              <li>Airflow + Jenkins scheduling; automated alerts; −15–20 hrs/wk manual ops.</li>
+              <li>SQL Server tuning (procs/views/functions); −40% query latency; Power BI dashboards for real‑time insights.</li>
+            </ul>
+          </div>
+        </div>
+      </Section>
+
+      {/* Skills */}
+      <Section id="skills" title="Skills & Tools">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { h: "Languages", p: "Python, SQL, Bash" },
+            { h: "Data Engineering", p: "PySpark, Spark SQL, Delta Lake, Batch & Streaming" },
+            { h: "Platforms", p: "Databricks, Airflow, Jenkins, Step Functions" },
+            { h: "Cloud (AWS)", p: "S3, Glue, Redshift, Kinesis, IAM" },
+            { h: "Cloud (Azure)", p: "ADF, Synapse, ADLS, Azure DevOps" },
+            { h: "DW/BI", p: "Snowflake, Redshift, Synapse, Power BI, Tableau, dbt" },
+            { h: "Quality & Governance", p: "Great Expectations, Unity Catalog, Schema Validation" },
+            { h: "Infra & CI/CD", p: "Terraform, Git, CI/CD, Monitoring/Logging" },
+          ].map((card, i) => (
+            <div key={i} className="rounded-2xl p-5 bg-white/5 border border-white/10">
+              <div className="font-semibold mb-1">{card.h}</div>
+              <div className="text-slate-300 text-sm">{card.p}</div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Projects */}
+      <Section id="projects" title="Featured Projects">
+        <div className="grid md:grid-cols-2 gap-6">
+          {[
+            {
+              t: "Real‑Time Logistics Tracking",
+              d: "Kinesis + Databricks Streaming + Delta Lake delivering &lt;30s latency for package visibility and SLA alerts.",
+            },
+            {
+              t: "Customer Retention Analytics",
+              d: "Azure Databricks + PySpark feature engineering; NPS & churn models with +5–7% retention uplift.",
+            },
+            {
+              t: "Healthcare Adherence Forecasting",
+              d: "Databricks + Prophet predicting patient adherence at 85% accuracy; enabled targeted interventions.",
+            },
+            {
+              t: "Cost‑Optimized Lakehouse",
+              d: "Unity Catalog + Great Expectations + autoscaling to cut compute spend 20–25% with 99.9% reliability.",
+            },
+          ].map((p, i) => (
+            <div key={i} className="rounded-2xl p-6 bg-white/5 border border-white/10">
+              <div className="font-bold mb-1">{p.t}</div>
+              <div className="text-slate-300 text-sm">{p.d}</div>
+              <div className="mt-3">
+                <a className="text-slate-300 hover:text-slate-200 text-sm" href="#" onClick={(e)=>e.preventDefault()}>GitHub (upon request)</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Resume Anchor */}
+      <Section id="resume" title="Resume">
+        <div className="rounded-2xl p-6 bg-white/5 border border-white/10 text-slate-200 text-sm">
+          <p>
+            Need the full details? Download the latest resume. (Wire this to a PDF or Google Drive link when deploying.)
+          </p>
+          <div className="mt-4">
+            <a className="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-xl font-semibold" href="#" onClick={(e)=>e.preventDefault()}>Download Resume</a>
+          </div>
+        </div>
+      </Section>
+
+      {/* Contact */}
+      <Section id="contact" title="Contact">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
+            <div className="font-bold mb-2">Let’s build something data‑driven.</div>
+            <div className="text-slate-300 text-sm">
+              Email: <a className="underline" href="mailto:varshithag1908@gmail.com">varshithag1908@gmail.com</a>
+            </div>
+            <div className="text-slate-300 text-sm mt-1">Location: New Jersey, USA</div>
+          </div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              alert("Thanks! Your message has been recorded in this demo form.");
+            }}
+            className="rounded-2xl p-6 bg-white/5 border border-white/10"
+          >
+            <div className="grid gap-3">
+              <input required placeholder="Your name" className="rounded-xl bg-transparent border border-white/20 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-600" />
+              <input type="email" required placeholder="Email" className="rounded-xl bg-transparent border border-white/20 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-600" />
+              <textarea required placeholder="Message" rows={4} className="rounded-xl bg-transparent border border-white/20 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-600" />
+              <button className="justify-self-start bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-2xl font-semibold">Send</button>
+            </div>
+          </form>
+        </div>
+      </Section>
+
+      {/* Footer */}
+      <footer className="text-center text-slate-400 text-xs py-10">
+        © {new Date().getFullYear()} Varshitha Gudimalla · Data Engineer
+      </footer>
+    </div>
+  );
+}
