@@ -211,5 +211,22 @@
   </footer>
 
   <script src="app.js"></script>
+
+  <!-- Chatbot -->
+<div id="chatbot" aria-live="polite">
+  <button id="chat-toggle" aria-expanded="false" aria-controls="chat-panel" class="chat-btn">
+    Chat
+  </button>
+
+  <div id="chat-panel" class="chat-panel" hidden>
+    <div class="chat-header">Assistant</div>
+    <div id="chat-window" class="chat-window"></div>
+    <div class="chat-input">
+      <input id="userInput" type="text" placeholder="Ask about skills, experience, projects…" />
+      <button id="sendBtn" class="send-btn">Send</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
