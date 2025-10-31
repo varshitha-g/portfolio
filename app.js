@@ -1,30 +1,25 @@
-// --- Real Links for Varshitha Gudimalla ---
+// --- Real links for Varshitha ---
 const LINKS = {
   github:   "https://github.com/varshitha-g",
   linkedin: "https://www.linkedin.com/in/varshitha-gudimalla-data-engineer/",
   portfolio:"https://varshitha-g.github.io/portfolio/",
-  resume:   "#" // add your resume PDF link later
+  resume:   "#" // add your resume PDF later (e.g., /Varshitha_Gudimalla_Resume.pdf)
 };
 
-// Header icons
-const gh = document.getElementById("ghLink");
-const li = document.getElementById("liLink");
-if (gh) gh.href = LINKS.github;
-if (li) li.href = LINKS.linkedin;
+// Hook icons + inline links + footer year
+[
+  ["ghLink","github"],["ghLink2","github"],["ghLinkInline","github"],
+  ["liLink","linkedin"],["liLink2","linkedin"],["liLinkInline","linkedin"],
+  ["pfLink","portfolio"],["pfLink2","portfolio"],["pfLinkInline","portfolio"],
+].forEach(([id,key]) => { const el = document.getElementById(id); if (el) el.href = LINKS[key]; });
 
-// Connect links
-const gh2 = document.getElementById("ghLink2");
-const li2 = document.getElementById("liLink2");
-const pf2 = document.getElementById("pfLink2");
-if (gh2) gh2.href = LINKS.github;
-if (li2) li2.href = LINKS.linkedin;
-if (pf2) pf2.href = LINKS.portfolio;
-
-// Resume button
 const resumeBtn = document.getElementById("resumeLink");
 if (resumeBtn) resumeBtn.href = LINKS.resume;
 
-// Smooth in-page scroll
+const yr = document.getElementById("yr");
+if (yr) yr.textContent = new Date().getFullYear();
+
+// Smooth in-page scroll for nav tabs
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener("click", e => {
     const id = link.getAttribute("href");
@@ -34,10 +29,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     }
   });
 });
-
-// Footer year
-const yr = document.getElementById("yr");
-if (yr) yr.textContent = new Date().getFullYear();
 
 /* ===================== Chatbot ===================== */
 const chatToggle = document.getElementById("chat-toggle");
@@ -59,12 +50,10 @@ if (chatToggle && chatPanel && chatWin && userInput && sendBtn) {
     });
     chatWin.scrollTop = chatWin.scrollHeight;
   }
-
   function loadMessages(){
     try { return JSON.parse(localStorage.getItem(storageKey)) || []; }
     catch { return []; }
   }
-
   function saveMessages(msgs){
     localStorage.setItem(storageKey, JSON.stringify(msgs));
   }
@@ -72,12 +61,22 @@ if (chatToggle && chatPanel && chatWin && userInput && sendBtn) {
   function botReply(q){
     const s = q.toLowerCase();
 
-    if (/(resume|cv)/.test(s)) return "Share your email in Contact, and I’ll send the latest resume (or check the Resume button when available).";
-    if (/(contact|email|reach|phone)/.test(s)) return "Reach Varshitha at varshithag1908@gmail.com or use the form in the Contact section.";
-    if (/(skill|stack|tech|tools?)/.test(s)) return "Core: Python, SQL, PySpark, Databricks, Airflow, Delta, dbt, Terraform. Cloud: AWS & Azure. BI: Power BI, Tableau.";
-    if (/(experience|work|fedex|knowledge|cloudend)/.test(s)) return "3+ yrs across FedEx (1B+ records/day), Knowledge Solutions (Azure 500GB/day), CloudEnd (HIPAA ETL).";
-    if (/(project|portfolio|github)/.test(s)) return "Real-time logistics (<30s), retention analytics (+5–7%), healthcare forecasting (85% accuracy).";
-    if (/(hire|availability|location|onsite|remote)/.test(s)) return "Based in USA. Open to remote/hybrid/onsite.";
+    // Simple intents aligned to your resume/portfolio
+    if (/(contact|email|reach|phone)/.test(s))
+      return "Reach Varshitha at varshithag1908@gmail.com or use the Connect section.";
+    if (/(resume|cv)/.test(s))
+      return "Use the View Resume button (top of page) once the link is added, or email me via Connect.";
+    if (/(skill|skills|stack|tech|tools?)/.test(s))
+      return "Languages: Python, SQL, PySpark · Big Data: Spark, Delta, Hive · Cloud: AWS, Snowflake · Orchestration: Airflow, DBX Workflows, Jenkins · Quality: Great Expectations · DevOps: Git, Terraform, CI/CD · BI: Power BI, Tableau · Security: IAM, PII.";
+    if (/(experience|work|fedex|knowledge|cloudend)/.test(s))
+      return "FedEx: secure, SLA-driven ETL/monitoring; Knowledge Solutions: Databricks ETL + CI/CD; CloudEnd: HIPAA ETL + forecasting.";
+    if (/(project|projects)/.test(s))
+      return "Examples: Real-time Shipment Tracker (<30s visibility), Retention Analytics (churn/NPS), Healthcare Forecasting (Prophet 85% accuracy).";
+    if (/(education|school|degree)/.test(s))
+      return "MS Data Science (UAlbany, 2025) and B.Tech CSE (CMR, 2022).";
+    if (/(hire|availability|location|onsite|remote)/.test(s))
+      return "Based in USA; open to remote/hybrid/onsite roles.";
+
     return "I can answer about skills, experience, projects, or contact. Try: “What are your AWS skills?”";
   }
 
@@ -107,7 +106,7 @@ if (chatToggle && chatPanel && chatWin && userInput && sendBtn) {
       messages.push({role:"bot", text: reply});
       renderMessages(messages);
       saveMessages(messages);
-    }, 350);
+    }, 300);
   }
 
   sendBtn.addEventListener("click", sendMessage);
