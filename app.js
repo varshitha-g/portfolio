@@ -3,7 +3,7 @@ const LINKS = {
   github:   "https://github.com/varshitha-g",
   linkedin: "https://www.linkedin.com/in/varshitha-gudimalla-data-engineer/",
   portfolio:"https://varshitha-g.github.io/portfolio/",
-  resume:   "#" // replace with your PDF later
+  resume:   "https://drive.google.com/file/d/1LH1SkYMuNczKnd94ltX4_iVUEOE4WEH8/view?usp=sharing"
 };
 
 // map IDs to link keys (works for icons, inline, and footer links)
