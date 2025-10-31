@@ -42,37 +42,7 @@ p{line-height:1.6;color:var(--muted)}
 }
 .tabs .tab:hover{background:#F3F4F6;color:var(--ink)}
 
-/* ============  Hero  ============ */
-.hero{
-  background:#CCD5AE;               /* requested soft hero color */
-  padding:72px 0 88px;
-  border-bottom:1px solid var(--line);
-}
-.hero__grid{
-  display:grid; grid-template-columns:.9fr 1.1fr; gap:40px; align-items:center;
-}
-.hero__photo{
-  margin-left:40px; /* ✅ shifts the photo slightly right */
-}
-.hero__photo img{
-  width:280px; height:280px; object-fit:cover;
-  border-radius:999px; border:6px solid #f7fafc; box-shadow:var(--shadow);
-}
-.eyebrow{color:#2b3640; opacity:.8; margin:0 0 6px 0; font-weight:600}
-h1{font-size:56px; line-height:1.05}
-.subtitle{font-size:28px; color:#344054; margin:8px 0 20px}
-
-/* Buttons */
-.btnrow{display:flex; gap:12px}
-.btn{
-  display:inline-flex; align-items:center; gap:8px;
-  background:#fff; color:#111827; padding:10px 14px; border-radius:12px; text-decoration:none;
-  border:1px solid var(--line); box-shadow:var(--shadow); font-weight:600;
-  transition:background .15s ease, transform .06s ease;
-}
-.btn:hover{background:#f8fafc}
-.btn:active{transform:translateY(1px)}
-.btn.lite{background:#ffffff}
+/* ============ Hero ============ */ .hero{ background:#CCD5AE; /* requested soft hero color */ padding:72px 0 88px; border-bottom:1px solid var(--line); } .hero__grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:40px; align-items:center; } .hero__photo img{ width:280px; height:280px; object-fit:cover; border-radius:999px; border:6px solid #f7fafc; box-shadow:var(--shadow); } .eyebrow{color:#2b3640; opacity:.8; margin:0 0 6px 0; font-weight:600} h1{font-size:56px; line-height:1.05} .subtitle{font-size:28px; color:#344054; margin:8px 0 20px} /* Buttons */ .btnrow{display:flex; gap:12px} .btn{ display:inline-flex; align-items:center; gap:8px; background:#fff; color:#111827; padding:10px 14px; border-radius:12px; text-decoration:none; border:1px solid var(--line); box-shadow:var(--shadow); font-weight:600; transition:background .15s ease, transform .06s ease; } .btn:hover{background:#f8fafc} .btn:active{transform:translateY(1px)} .btn.lite{background:#ffffff}
 
 
 /* ===== Sections & Cards ===== */
