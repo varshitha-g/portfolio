@@ -61,6 +61,10 @@ h1{font-size:56px;line-height:1.05;color:#0f172a}
 }
 .btn:hover{background:#f8fafc}
 .btn.lite{background:#fff}
+.hero__photo {
+  position: relative;
+  left: 20px; /* adjust this value — try 10–40px to taste */
+}
 
 /* ===== Sections & Cards ===== */
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
