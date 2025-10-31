@@ -2,218 +2,253 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Varshitha Gudimalla | Data Engineer</title>
-  <meta name="description" content="Varshitha Gudimalla — Data Engineer. AWS · Azure · Databricks · PySpark · Airflow.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Varshitha Gudimalla | Data Engineer Portfolio</title>
   <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Varshitha Gudimalla — Data Engineer. AWS • Azure • PySpark • Databricks • Airflow.">
 </head>
+
 <body>
-  <!-- Top Bar -->
+  <!-- ===== HEADER / NAV ===== -->
   <header class="topbar">
     <div class="container topbar__inner">
-      <!-- Left: Social Icons -->
+      <!-- Left icons -->
       <div class="iconbar">
-        <a id="ghLink" class="iconbtn" aria-label="GitHub" href="#" target="_blank" rel="noreferrer">
-          <!-- GitHub icon -->
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.39 7.86 10.9.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.69-1.29-1.69-1.05-.73.08-.72.08-.72 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.97.1-.75.4-1.26.72-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.19a10.9 10.9 0 0 1 5.73 0c2.19-1.5 3.15-1.19 3.15-1.19.62 1.58.23 2.75.11 3.04.73.81 1.18 1.85 1.18 3.11 0 4.41-2.7 5.38-5.27 5.67.41.36.77 1.07.77 2.16 0 1.56-.01 2.81-.01 3.19 0 .3.21.67.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z" fill="currentColor"/></svg>
+        <a id="liLink" href="#" target="_blank" class="iconbtn" title="LinkedIn" aria-label="LinkedIn">
+          <!-- simple LI glyph -->
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3.5 9h3v12h-3zM9 9h2.88v1.64h.04c.4-.76 1.38-1.56 2.84-1.56C17.78 9.08 19 10.7 19 13.2V21h-3v-6.7c0-1.6-.57-2.7-2-2.7-1.09 0-1.74.73-2.02 1.43-.1.24-.12.57-.12.91V21H9z"/></svg>
         </a>
-        <a id="liLink" class="iconbtn" aria-label="LinkedIn" href="#" target="_blank" rel="noreferrer">
-          <!-- LinkedIn icon -->
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3.5 9h3v12h-3zM9 9h2.88v1.64h.04c.4-.76 1.38-1.56 2.84-1.56C17.78 9.08 19 10.7 19 13.2V21h-3v-6.7c0-1.6-.57-2.7-2-2.7-1.09 0-1.74.73-2.02 1.43-.1.24-.12.57-.12.91V21H9z" fill="currentColor"/></svg>
+        <a id="ghLink" href="#" target="_blank" class="iconbtn" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.39 7.86 10.9.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.69-1.29-1.69-1.05-.73.08-.72.08-.72 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.97.1-.75.4-1.26.72-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.19a10.9 10.9 0 0 1 5.73 0c2.19-1.5 3.15-1.19 3.15-1.19.62 1.58.23 2.75.11 3.04.73.81 1.18 1.85 1.18 3.11 0 4.41-2.7 5.38-5.27 5.67.41.36.77 1.07.77 2.16 0 1.56-.01 2.81-.01 3.19 0 .3.21.67.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
         </a>
-        <a class="iconbtn" aria-label="Email" href="mailto:varshithag1908@gmail.com">
-          <!-- Mail icon -->
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5z" fill="currentColor"/></svg>
+        <a id="pfLink" href="#" target="_blank" class="iconbtn" title="My Portfolio" aria-label="Portfolio">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M3 7a2 2 0 0 1 2-2h3l1-2h6l1 2h3a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7zm2 0v11h14V7H5z"/></svg>
+        </a>
+        <a href="mailto:varshithag1908@gmail.com" class="iconbtn" title="Email" aria-label="Email">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5z"/></svg>
         </a>
       </div>
 
-      <!-- Right: Tabs -->
-      <nav class="tabs">
+      <!-- Right tabs -->
+      <nav class="tabs" aria-label="Primary">
         <a href="#home" class="tab">Home</a>
         <a href="#about" class="tab">About</a>
         <a href="#skills" class="tab">Skills</a>
         <a href="#education" class="tab">Education</a>
         <a href="#experience" class="tab">Experience</a>
         <a href="#projects" class="tab">Projects</a>
-        <a href="#connect" class="tab">Contact</a>
+        <a href="#connect" class="tab">Connect</a>
       </nav>
     </div>
   </header>
 
-  <!-- HERO (soft blue band) -->
+  <!-- ===== HERO ===== -->
   <section id="home" class="hero">
     <div class="container hero__grid">
-      <figure class="hero__photo">
-        <img src="images/profile.jpg" alt="Varshitha Gudimalla headshot" />
-      </figure>
-      <div class="hero__copy">
-        <p class="eyebrow">Hi there! I'm</p>
+      <div>
+        <p class="eyebrow">Hi there 👋 I’m</p>
         <h1>Varshitha Gudimalla</h1>
-        <p class="subtitle">Data Engineer</p>
+        <p class="subtitle">Data Engineer • AWS • Azure • PySpark • Databricks</p>
+
+        <!-- Contact strip -->
+        <p style="margin:10px 0 16px 0; color:#344054;">
+          USA &nbsp;|&nbsp; (518)-528-7072 &nbsp;|&nbsp;
+          <a href="mailto:varshithag1908@gmail.com">Email</a> &nbsp;|&nbsp;
+          <a id="liLinkInline" href="#" target="_blank" rel="noreferrer">LinkedIn</a> &nbsp;|&nbsp;
+          <a id="pfLinkInline" href="#" target="_blank" rel="noreferrer">My Portfolio</a> &nbsp;|&nbsp;
+          <a id="ghLinkInline" href="#" target="_blank" rel="noreferrer">GitHub</a>
+        </p>
+
         <div class="btnrow">
-          <a id="resumeLink" class="btn" href="#" target="_blank" rel="noreferrer">
-            <!-- doc icon -->
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm1 7h5l-5-5v5Zm-8 4h10v2H7v-2Zm0 4h10v2H7v-2Zm0-8h6v2H7V9Z" fill="currentColor"/></svg>
-            View Resume
-          </a>
+          <a id="resumeLink" href="#" target="_blank" class="btn">📄 View Resume</a>
+          <a href="#connect" class="btn lite">📬 Contact</a>
         </div>
+      </div>
+      <div class="hero__photo">
+        <!-- Use your headshot file name; square image looks best -->
+        <img src="profile.jpg" alt="Varshitha Gudimalla" />
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ===== ABOUT (from your resume summary) ===== -->
   <section id="about" class="section">
     <div class="container">
       <h2>About</h2>
       <p>
         Experienced Data Engineer designing and implementing scalable ETL/ELT pipelines across AWS and Azure cloud platforms,
-        processing 1B+ daily records from healthcare, e-commerce, and logistics domains. Proven track record of delivering
-        40–50% query performance improvements, 99.9% SLA compliance, and 15–25% cost reductions via automation and
-        infrastructure optimization. Strong expertise in PySpark, Databricks, SQL, and real-time data processing; effective
-        collaborator with cross-functional teams to convert complex data needs into actionable insights.
+        processing 1B+ daily records across healthcare, e-commerce, and logistics. Proven impact: 40–50% query performance gains,
+        99.9% SLA compliance, and 15–25% cost reductions via automation and infrastructure optimization. Strong in PySpark,
+        Databricks, SQL, and real-time data processing; collaborate with cross-functional teams to translate complex requirements
+        into analytics-ready, compliant data products.
       </p>
     </div>
   </section>
 
-  <!-- SKILLS -->
+  <!-- ===== SKILLS (normalized to your list) ===== -->
   <section id="skills" class="section">
     <div class="container">
       <h2>Skills</h2>
       <div class="grid3">
-        <div class="card"><h3>Programming & Data</h3><p>Python (Pandas, NumPy, scikit-learn), SQL (CTEs, Windows), PySpark, Spark SQL, Scala</p></div>
-        <div class="card"><h3>Big Data</h3><p>Apache Spark, Delta Lake, Hadoop, Hive, partitioning & indexing</p></div>
-        <div class="card"><h3>Cloud</h3><p>AWS (S3, Glue, Redshift, Lambda, Kinesis, Step Functions, CloudWatch), Azure (ADF, Databricks, Synapse), Snowflake, BigQuery</p></div>
-        <div class="card"><h3>Storage & Architecture</h3><p>Lakes & Warehouses, Delta, Parquet, CDC, metadata mgmt</p></div>
-        <div class="card"><h3>Streaming</h3><p>Kafka, Kinesis, Spark Streaming, IoT telemetry</p></div>
-        <div class="card"><h3>Orchestration</h3><p>Airflow, Databricks Workflows, Jenkins, Step Functions</p></div>
-        <div class="card"><h3>Quality & Governance</h3><p>Great Expectations, schema validation, GDPR/PCI-DSS</p></div>
-        <div class="card"><h3>DevOps & Infra</h3><p>Git/GitHub, CI/CD, Terraform, Docker, Kubernetes, autoscaling</p></div>
-        <div class="card"><h3>Databases & BI</h3><p>Snowflake, SQL Server, SSIS, ADF, Synapse, ADLS, Power BI, Tableau, Looker</p></div>
+        <div class="card">
+          <h3>Languages</h3>
+          <p>Python, SQL, PySpark</p>
+        </div>
+        <div class="card">
+          <h3>Big Data & Processing</h3>
+          <p>Apache Spark, Delta Lake, Hive, SparkSQL</p>
+        </div>
+        <div class="card">
+          <h3>Cloud & Storage</h3>
+          <p>AWS (S3, Glue, Redshift, Lambda, Step Functions), Snowflake</p>
+        </div>
+        <div class="card">
+          <h3>Workflow Orchestration</h3>
+          <p>Apache Airflow, Databricks Workflows, Jenkins</p>
+        </div>
+        <div class="card">
+          <h3>Data Quality & Governance</h3>
+          <p>Great Expectations, Glue Catalog, Hive Metastore</p>
+        </div>
+        <div class="card">
+          <h3>DevOps & Infrastructure</h3>
+          <p>Git, Terraform, CI/CD</p>
+        </div>
+        <div class="card">
+          <h3>Visualization</h3>
+          <p>Power BI, Tableau</p>
+        </div>
+        <div class="card">
+          <h3>Data Warehousing</h3>
+          <p>ETL development, warehouse architecture, metadata management</p>
+        </div>
+        <div class="card">
+          <h3>Security & Compliance</h3>
+          <p>IAM, data privacy, PII handling</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- EDUCATION -->
+  <!-- ===== EDUCATION ===== -->
   <section id="education" class="section">
     <div class="container">
       <h2>Education</h2>
-      <div class="grid2">
-        <div class="edu card">
-          <div class="edu__title">University at Albany — <span>MS in Data Science</span></div>
-          <div class="edu__meta">Albany, New York • May 2025</div>
-        </div>
-        <div class="edu card">
-          <div class="edu__title">CMR Institute of Technology — <span>BTech in Computer Science</span></div>
-          <div class="edu__meta">Hyderabad, India • May 2022</div>
-        </div>
+      <div class="card">
+        <p><strong>University at Albany, SUNY — Master of Science in Data Science</strong></p>
+        <p class="muted">Albany, NY • Aug 2023 – May 2025</p>
+        <p class="muted"><em>Relevant Coursework:</em> Advanced Statistics, Machine Learning, Big Data Analytics, Data Mining, Business Intelligence, Statistical Computing</p>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <p><strong>CMR Institute of Technology, Hyderabad — B.Tech in Computer Science</strong></p>
+        <p class="muted">Hyderabad, India • Aug 2018 – May 2022</p>
+        <p class="muted"><em>Relevant Coursework:</em> Data Structures & Algorithms, DBMS, Software Engineering, OOP, Web Technologies</p>
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
+  <!-- ===== EXPERIENCE (condensed bullets from resume) ===== -->
   <section id="experience" class="section">
     <div class="container">
-      <h2>Experience</h2>
+      <h2>Professional Experience</h2>
 
-      <article class="xp card">
-        <div class="xp__head"><h3>Data Engineer · FedEx</h3><div class="muted">Jan 2025 – Present • New Jersey (Remote)</div></div>
+      <div class="card xp">
+        <h3>Data Engineer — FedEx (Remote)</h3>
+        <p class="muted"><em>Jan 2025 – Present • USA</em></p>
         <ul>
-          <li>Databricks (PySpark, Delta, Python) ingest & transform <strong>1B+ daily records</strong>; ETL runtime 4–5h → <strong>&lt;2h</strong>.</li>
-          <li>Airflow, Databricks Workflows, Step Functions, Jenkins; <strong>99.9% SLA</strong>.</li>
-          <li>S3, Glue Catalog, Redshift; modular Python; <strong>10–50TB</strong> daily multi-tenant data.</li>
-          <li>Great Expectations & Delta constraints; −<strong>30%</strong> reprocessing; ML feature tables.</li>
-          <li>IAM & Unity Catalog; CI/CD with Git; <strong>20–25%</strong> compute savings; streaming latency &lt; <strong>30s</strong>.</li>
+          <li>Built/modified high-complexity ETL in Python, PySpark & SQL for high-volume transactional/PII datasets with strict privacy & security.</li>
+          <li>Developed monitoring & alerting (Airflow, Step Functions) for data quality, unauthorized changes, and failures; auto-created tasks & email alerts.</li>
+          <li>Orchestrated daily ingestion/validation with Airflow & Databricks Workflows; minimal manual intervention.</li>
+          <li>Partnered with DS/Analyst/DevOps to deliver scalable pipelines for fraud detection & analytics; navigated ambiguity effectively.</li>
+          <li>Implemented Great Expectations & Delta constraints; versioning via Git; comprehensive documentation.</li>
+          <li>Engineered IAM roles & Unity Catalog access for secure multi-tenant governance; maintained privacy compliance.</li>
+          <li>Prevented data-loss incidents; tuned Spark & cluster configs to meet strict SLAs.</li>
         </ul>
-      </article>
+      </div>
 
-      <article class="xp card">
-        <div class="xp__head"><h3>Data Engineer · Knowledge Solutions</h3><div class="muted">Jun 2022 – Jul 2023 • Hyderabad, India</div></div>
+      <div class="card xp">
+        <h3>Data Engineer — Knowledge Solutions (Hyderabad, India)</h3>
+        <p class="muted"><em>Jun 2022 – Jul 2023</em></p>
         <ul>
-          <li>Azure Databricks pipelines for <strong>500GB/day</strong> (15TB/mo); NPS & churn models <strong>85% accuracy</strong>, +5–7% retention.</li>
-          <li>ADF orchestration; on-prem/API → ADLS automation; −15–20 hrs/wk ops; −15% compute cost.</li>
-          <li>Azure DevOps CI/CD (notebooks, SSIS, SQL); <strong>&gt;99.5% uptime</strong>, −30% failed runs.</li>
-          <li>ADLS + Synapse warehousing; partitioning; batch 5h → 3h; Snowflake queries <strong>+50%</strong> faster.</li>
-          <li>Power BI (CSAT, NPS, churn); Azure Monitor & Log Analytics.</li>
+          <li>Developed Python/PySpark Databricks ETL (~50K weekly customer datasets); built scalable warehouse infra for analytics & ML features.</li>
+          <li>Automated on-prem/API → S3 movement with Airflow; reliable schedules, clear handoffs.</li>
+          <li>Implemented Jenkins CI/CD for notebooks & jobs across dev/test/prod; >99.5% uptime, −30% failures.</li>
+          <li>Co-created ML-ready feature tables with DS/BI teams; clear communication of data needs.</li>
+          <li>Integrated Glue Catalog & Delta Lake for versioned data lake; downstream analytics support.</li>
+          <li>Proactively resolved data quality issues; validation checks to prevent data loss.</li>
+          <li>Built Power BI KPI dashboards with scheduled refreshes for stakeholders.</li>
         </ul>
-      </article>
+      </div>
 
-      <article class="xp card">
-        <div class="xp__head"><h3>Data Engineer · CloudEnd Platform Pvt Ltd</h3><div class="muted">Jun 2021 – May 2022 • Hyderabad, India</div></div>
+      <div class="card xp">
+        <h3>Data Engineer — CloudEnd Platform Pvt Ltd (Hyderabad, India)</h3>
+        <p class="muted"><em>Jun 2021 – May 2022</em></p>
         <ul>
-          <li>Databricks + AWS Glue + PySpark ETL; −30% runtime; HIPAA; <strong>&gt;99.5% uptime</strong>.</li>
-          <li>SQL Server / flat files / REST via SSIS & PySpark; Glue/HMS governance; zero violations.</li>
-          <li>Prophet forecasts (Databricks) with <strong>85% accuracy</strong>; enabled 500+ clinical staff; +10–12% completion rates.</li>
-          <li>Airflow + Jenkins; alerting; −15–20 hrs/wk manual ops.</li>
-          <li>SQL tuning; −40% latency; Power BI real-time insights; IAM & encryption; −15% ETL cost.</li>
+          <li>Constructed Databricks + AWS Glue + PySpark ETL for sensitive therapy logs & survey data into Delta (compliance-driven analytics).</li>
+          <li>Ingested structured/semi-structured data (S3, files, REST); standardized metadata in Glue Catalog & Hive Metastore.</li>
+          <li>Scheduled/monitored Airflow DAGs with Jenkins deployment; nightly refreshes; proactive failure alerting.</li>
+          <li>Optimized SQL procs/views for patient segmentation; robust warehouse support for reporting teams.</li>
+          <li>Maintained Git, docs, and IAM policies aligned to healthcare privacy/governance.</li>
+          <li>Built Prophet forecasts (85% accuracy) for patient outcomes; partnered with clinical teams.</li>
         </ul>
-      </article>
+      </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
+  <!-- ===== PROJECTS (concise) ===== -->
   <section id="projects" class="section">
     <div class="container">
       <h2>Projects</h2>
       <div class="grid3">
         <div class="card">
-          <h3>Real-Time Logistics Tracking</h3>
-          <p>Kinesis + Databricks Streaming + Delta Lake delivering &lt;30s latency for package visibility and SLA alerts.</p>
+          <h3>Real-Time Shipment Tracker</h3>
+          <p>Kinesis + Spark Streaming + Delta for &lt;30s visibility, SLA alerts, and fraud-risk signals.</p>
         </div>
         <div class="card">
-          <h3>Customer Retention Analytics</h3>
-          <p>Azure Databricks + PySpark feature engineering; NPS & churn models with +5–7% retention uplift.</p>
+          <h3>Retention Analytics</h3>
+          <p>PySpark features + dashboarding; churn/NPS modeling; scheduled BI refreshes for leadership.</p>
         </div>
         <div class="card">
-          <h3>Healthcare Adherence Forecasting</h3>
-          <p>Databricks + Prophet predicting patient adherence at 85% accuracy; enabled targeted interventions.</p>
+          <h3>Healthcare Outcome Forecasting</h3>
+          <p>Databricks + Prophet (85% accuracy) predicting adherence; compliant data handling.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONNECT -->
+  <!-- ===== CONNECT ===== -->
   <section id="connect" class="section">
     <div class="container">
-      <h2>Contact</h2>
-      <div class="grid2">
-        <div class="card">
-          <p><strong>Phone:</strong> (518)-528-7072</p>
-          <p><strong>Email:</strong> <a href="mailto:varshithag1908@gmail.com">varshithag1908@gmail.com</a></p>
-          <p><strong>Location:</strong> USA</p>
-          <p class="links">
-            <a id="liLink2" href="#" target="_blank" rel="noreferrer">LinkedIn</a> ·
-            <a id="pfLink2" href="#" target="_blank" rel="noreferrer">My Portfolio</a> ·
-            <a id="ghLink2" href="#" target="_blank" rel="noreferrer">GitHub</a>
-          </p>
-        </div>
-
-        <form class="card form" onsubmit="event.preventDefault(); alert('Thanks! Your message was recorded (demo).');">
-          <label>
-            <span>Name</span>
-            <input type="text" required />
-          </label>
-          <label>
-            <span>Email</span>
-            <input type="email" required />
-          </label>
-          <label>
-            <span>Message</span>
-            <textarea rows="4" required></textarea>
-          </label>
-          <button type="submit" class="btn lite">Send</button>
-        </form>
+      <h2>Connect</h2>
+      <p>📍 USA &nbsp;&nbsp; 📞 (518)-528-7072 &nbsp;&nbsp; 📧 <a href="mailto:varshithag1908@gmail.com">varshithag1908@gmail.com</a></p>
+      <div class="btnrow">
+        <a id="liLink2" href="#" target="_blank" class="btn">LinkedIn</a>
+        <a id="ghLink2" href="#" target="_blank" class="btn">GitHub</a>
+        <a id="pfLink2" href="#" target="_blank" class="btn">My Portfolio</a>
       </div>
     </div>
   </section>
 
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">© <span id="yr"></span> Varshitha Gudimalla</div>
   </footer>
+
+  <!-- ===== CHATBOT (floating, light) ===== -->
   <!-- Chatbot -->
 <div id="chatbot" aria-live="polite">
-  <button id="chat-toggle" aria-expanded="false" aria-controls="chat-panel" class="chat-btn">
-    Chat
+  <!-- Updated: circular 'VG' logo button -->
+  <button id="chat-toggle" aria-expanded="false" aria-controls="chat-panel" class="chat-btn" aria-label="Open chat">
+    <span class="logo-badge" aria-hidden="true">VG</span>
   </button>
+
+  <!-- New: greeting bubble -->
+  <div id="chat-greet" class="chat-greet" hidden>
+    <div class="chat-greet-text">
+      Hi there! Have any questions? Let me answer them for you.
+    </div>
+    <button class="chat-greet-close" aria-label="Close greeting">×</button>
+  </div>
 
   <div id="chat-panel" class="chat-panel" hidden>
     <div class="chat-header">Assistant</div>
@@ -227,6 +262,5 @@
 
 
   <script src="app.js"></script>
-
 </body>
 </html>
