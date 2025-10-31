@@ -48,8 +48,19 @@ p{line-height:1.6;color:var(--muted)}
   padding:72px 0 88px;border-bottom:1px solid var(--line);
 }
 .hero__grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center}
-.hero__photo img{
-  width:280px;height:280px;object-fit:cover;border-radius:999px;border:6px solid #fff;box-shadow:var(--shadow)
+.hero__photo {
+  display: flex;
+  justify-content: flex-end; /* moves image toward the right edge */
+}
+
+.hero__photo img {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 999px;
+  border: 6px solid #fff;
+  box-shadow: var(--shadow);
+  margin-right: 30px; /* fine-tune the distance */
 }
 .eyebrow{font-weight:600;color:#2b3640;opacity:.9}
 h1{font-size:56px;line-height:1.05;color:#0f172a}
@@ -61,10 +72,7 @@ h1{font-size:56px;line-height:1.05;color:#0f172a}
 }
 .btn:hover{background:#f8fafc}
 .btn.lite{background:#fff}
-.hero__photo {
-  position: relative;
-  left: 20px; /* adjust this value — try 10–40px to taste */
-}
+
 
 /* ===== Sections & Cards ===== */
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
